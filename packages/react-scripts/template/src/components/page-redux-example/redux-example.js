@@ -1,6 +1,6 @@
 import React from 'react';
-import PeopleContainer from '../peopleContainer';
-import Buffer from '../buffer';
+import PeopleContainer from './peopleContainer';
+import Buffer from '../balanc3-components/buffer';
 
 export default () => (
   <div>

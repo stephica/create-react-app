@@ -1,6 +1,6 @@
 /*
 *
-* Blends and Meshes the colors from Material Design
+* Blends and Meshes the colors or other things
 * for use in styled components
 *
 */

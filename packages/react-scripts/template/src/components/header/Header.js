@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Buffer from '../buffer';
+import Buffer from '../balanc3-components/buffer';
 
 const HeaderRow = styled('div')`
   background-color: ${props => props.theme.dark}
@@ -22,7 +22,8 @@ const Header = () => {
         <HeaderLink to="/" style={{ margin: '0 60px 0 0' }}>
           Balanc3 Starter
         </HeaderLink>
-        <HeaderLink to="/examples">Examples</HeaderLink>
+        <HeaderLink to="/Redux">Redux</HeaderLink>
+        <HeaderLink to="/GraphQl">GraphQl</HeaderLink>
       </Buffer>
     </HeaderRow>
   );
