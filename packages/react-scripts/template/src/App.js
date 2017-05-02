@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import baseStyles from './components/base/base-styles';
+import ReduxExample from './components/page_reduxExample';
+import { Route } from 'react-router-dom';
+import Home from './components/home';
+import Header from './components/header';
 
 class App extends Component {
   render() {
+    baseStyles();
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <Header />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/redux" component={ReduxExample} />
       </div>
     );
   }
