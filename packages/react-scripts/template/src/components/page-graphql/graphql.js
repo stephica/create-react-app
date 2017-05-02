@@ -15,7 +15,7 @@ const GraphQl = ({ address, setAddress }) => (
 
 GraphQl.propTypes = {
   address: string,
-  setAddress: func,
+  setAddress: func
 };
 
 export default GraphQl;
