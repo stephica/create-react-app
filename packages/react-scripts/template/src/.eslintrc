@@ -27,7 +27,7 @@
     "array-callback-return": "warn",
     "arrow-parens": [
       "warn",
-      "always"
+      "as-needed"
     ],
     "arrow-spacing": [
       "warn",
@@ -385,7 +385,7 @@
     ],
     "space-before-function-paren": [
       "warn",
-      "always"
+      "never"
     ],
     "space-in-parens": [
       "warn",

@@ -1,11 +1,11 @@
 import { createLogic } from 'redux-logic'
-import { $addPerson } from './actions'
+import { $getBySender } from './actions'
 
-const addPerson = createLogic({
-  type: $addPerson,
+const getBySender = createLogic({
+  type: $getBySender,
   process({ getState, action }, dispatch, done) {
     console.log('action', action)
   }
 })
 
-export default [addPerson]
+export default [getBySender]
