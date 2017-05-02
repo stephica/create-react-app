@@ -22,9 +22,5 @@
     "prettier": "^0.21.0"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --no-semi es5 --single-quote --write",
-      "git add"
-    ]
-  }
+    }
 }
