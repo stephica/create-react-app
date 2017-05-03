@@ -1,29 +1,30 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class PersonInput extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.onAddPersonClick = this.onAddPersonClick.bind(this);
+    this.onAddPersonClick = this.onAddPersonClick.bind(this)
   }
 
   onAddPersonClick() {
-    const firstNameElement = document.getElementById('firstname');
-    const lastNameElement = document.getElementById('lastname');
+    const firstNameElement = document.getElementById('firstname')
+    const lastNameElement = document.getElementById('lastname')
 
     this.props.addPerson({
       firstname: firstNameElement.value,
-      lastname: lastNameElement.value,
-    });
+      lastname: lastNameElement.value
+    })
 
-    firstNameElement.value = '';
-    lastNameElement.value = '';
+    firstNameElement.value = ''
+    lastNameElement.value = ''
 
-    firstNameElement.focus();
+    firstNameElement.focus()
   }
 
   componentDidMount() {
-    document.getElementById('firstname').focus();
+    document.getElementById('firstname').focus()
   }
 
   render() {
@@ -33,12 +34,12 @@ class PersonInput extends Component {
         <input id="lastname" type="text" placeholder="Last Name" />
         <button onClick={this.onAddPersonClick}>Add Person</button>
       </div>
-    );
+    )
   }
 }
 
 PersonInput.propTypes = {
-  addPerson: PropTypes.func.isRequired,
-};
+  addPerson: PropTypes.func.isRequired
+}
 
-export default PersonInput;
+export default PersonInput
