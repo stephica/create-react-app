@@ -3,13 +3,6 @@ import _Graphql from './graphql'
 import { withState } from 'recompose'
 import { getBySender } from './actions'
 
-function mapStateToProps(state, props) {
-  return {
-    // address: address,
-    // changehandler: changehandler
-  }
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     search: sender => {
@@ -25,4 +18,4 @@ const enhance = withState(
 )
 const Graphql = enhance(_Graphql)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Graphql)
+export default connect(null, mapDispatchToProps)(Graphql)

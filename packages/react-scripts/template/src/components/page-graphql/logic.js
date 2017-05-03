@@ -14,7 +14,7 @@ const getBySender = createLogic({
 
     var data = new FormData()
     data.append('json', JSON.stringify(payload))
-    fetch('http://45.55.151.65/', {
+    fetch('http://45.55.151.65/graphql/', {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
