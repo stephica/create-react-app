@@ -5,7 +5,9 @@ import { Input, Button } from 'semantic-ui-react'
 
 const GraphQl = ({ address, setAddress, search }) => {
   const changehandler = e => setAddress(e.target.value)
-  const clickhandler = () => search(address)
+  const clickhandler = () => {
+    search(address)
+  }
   return (
     <Buffer>
       <h2>GraphQl</h2>

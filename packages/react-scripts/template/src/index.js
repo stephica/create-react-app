@@ -12,14 +12,8 @@ import {
   createNetworkInterface
 } from 'react-apollo'
 
-const networkInterface = createNetworkInterface({
-  uri: 'http://45.55.151.65/'
-})
-
-const client = new ApolloClient({
-  networkInterface: networkInterface
-})
-
+const networkInterface = createNetworkInterface({ uri: 'http://45.55.151.65/' })
+const client = new ApolloClient({ networkInterface: networkInterface })
 const store = configureStore()
 
 /*ReactDOM.render(

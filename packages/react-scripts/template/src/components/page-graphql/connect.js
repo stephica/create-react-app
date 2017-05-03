@@ -12,7 +12,9 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    search: sender => dispatch(getBySender(sender))
+    search: sender => {
+      dispatch(getBySender(sender))
+    }
   }
 }
 
