@@ -1,1 +1,1 @@
-export { default } from './Buffer';
+export { default } from './buffer'

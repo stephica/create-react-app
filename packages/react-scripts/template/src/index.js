@@ -22,17 +22,26 @@ const client = new ApolloClient({
 
 const store = configureStore()
 
-ReactDOM.render(
+/*ReactDOM.render(
   <Provider store={store}>
-    {/* styled-components */}
     <ThemeProvider theme={theme}>
-      {/* adds Apollo */}
-      <ApolloProvider client={client}>
+      <ApolloProvider client={client} store={store}>
         <Router>
           <App />
         </Router>
       </ApolloProvider>
     </ThemeProvider>
   </Provider>,
+  document.getElementById('root')
+)*/
+
+ReactDOM.render(
+  <ThemeProvider theme={theme}>
+    <ApolloProvider client={client} store={store}>
+      <Router>
+        <App />
+      </Router>
+    </ApolloProvider>
+  </ThemeProvider>,
   document.getElementById('root')
 )
