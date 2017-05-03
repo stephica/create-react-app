@@ -1,14 +1,15 @@
-import React, { PropTypes } from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 const addGutterToChildren = (children, style, responsive) => {
-  const length = React.Children.count(children);
+  const length = React.Children.count(children)
   return React.Children.map(children, (child, i) => {
     return (i < length - 1 || responsive) && child
       ? React.cloneElement(child, { style: { ...child.props.style, ...style } })
-      : child;
-  });
-};
+      : child
+  })
+}
 
 const Flex = styled.div`
   display: flex;
@@ -18,8 +19,7 @@ const Flex = styled.div`
   ${({ flex }) => flex && `flex: ${flex};`}
   ${({ wrap }) => wrap && 'flex-wrap: wrap;'}
   ${({ height }) => height && `height: ${height};`}
-  ${({ justifyContent }) =>
-  justifyContent && `justify-content: ${justifyContent};`}
+  ${({ justifyContent }) => justifyContent && `justify-content: ${justifyContent};`}
   ${({ maxHeight }) => maxHeight && `max-height: ${maxHeight};`}
   ${({ maxWidth }) => maxWidth && `max-width: ${maxWidth};`}
   ${({ minHeight }) => minHeight && `min-height: ${minHeight};`}
@@ -28,30 +28,28 @@ const Flex = styled.div`
   ${({ paddingBottom }) => paddingBottom && `padding-bottom: ${paddingBottom};`}
   ${({ paddingLeft }) => paddingLeft && `padding-left: ${paddingLeft};`}
   ${({ paddingRight }) => paddingRight && `padding-right: ${paddingRight};`}
-  ${({ paddingX }) =>
-  paddingX && `padding-left: ${paddingX}; padding-right: ${paddingX};`}
-  ${({ paddingY }) =>
-  paddingY && `padding-top: ${paddingY}; padding-bottom: ${paddingY};`}
+  ${({ paddingX }) => paddingX && `padding-left: ${paddingX}; padding-right: ${paddingX};`}
+  ${({ paddingY }) => paddingY && `padding-top: ${paddingY}; padding-bottom: ${paddingY};`}
   ${({ paddingTop }) => paddingTop && `padding-top: ${paddingTop};`}
   ${({ width }) => width && `width: ${width}`};
-`;
+`
 
 const FlexRow = styled(Flex)`
   flex-direction: row;
-`;
+`
 
 const FlexCol = styled(Flex)`
   flex-direction: column;
-`;
+`
 
 const FlexGrid = styled(FlexRow)`
   flex-wrap: wrap;
-`;
+`
 
 const Fill = styled(Flex)`
   display: flex;
   flex: 1 1 auto;
-`;
+`
 
 const Col = ({ gutter, children, ...props }) => {
   return (
@@ -60,8 +58,8 @@ const Col = ({ gutter, children, ...props }) => {
         ? addGutterToChildren(children, { marginBottom: gutter })
         : children}
     </FlexCol>
-  );
-};
+  )
+}
 
 const Row = ({ gutter, children, ...props }) => {
   return (
@@ -70,8 +68,8 @@ const Row = ({ gutter, children, ...props }) => {
         ? addGutterToChildren(children, { marginRight: gutter })
         : children}
     </FlexRow>
-  );
-};
+  )
+}
 
 const Grid = ({ gutterX = '0px', gutterY = '0px', children, ...props }) => {
   return (
@@ -83,14 +81,14 @@ const Grid = ({ gutterX = '0px', gutterY = '0px', children, ...props }) => {
               marginRight: gutterX,
               marginLeft: gutterX,
               marginTop: gutterY,
-              marginBottom: gutterY,
+              marginBottom: gutterY
             },
             true
           )
         : children}
     </FlexGrid>
-  );
-};
+  )
+}
 
 const flexProps = {
   alignContent: PropTypes.oneOf([
@@ -99,14 +97,14 @@ const flexProps = {
     'flex-start',
     'space-around',
     'space-between',
-    'stretch',
+    'stretch'
   ]),
   alignItems: PropTypes.oneOf([
     'baseline',
     'center',
     'flex-end',
     'flex-start',
-    'stretch',
+    'stretch'
   ]),
   children: PropTypes.node,
   flex: PropTypes.string,
@@ -117,7 +115,7 @@ const flexProps = {
     'flex-end',
     'flex-start',
     'space-around',
-    'space-between',
+    'space-between'
   ]),
   maxHeight: PropTypes.string,
   maxWidth: PropTypes.string,
@@ -131,16 +129,16 @@ const flexProps = {
   paddingX: PropTypes.string,
   paddingY: PropTypes.string,
   width: PropTypes.string,
-  wrap: PropTypes.bool,
-};
+  wrap: PropTypes.bool
+}
 
-Col.PropTypes = flexProps;
-Row.PropTypes = flexProps;
+Col.PropTypes = flexProps
+Row.PropTypes = flexProps
 Grid.PropTypes = {
   ...flexProps,
   gutterX: PropTypes.string,
-  gutterY: PropTypes.string,
-};
-Fill.PropTypes = flexProps;
+  gutterY: PropTypes.string
+}
+Fill.PropTypes = flexProps
 
-export { Col, Row, Grid, Fill };
+export { Col, Row, Grid, Fill }
