@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form } from 'semantic-ui-react'
+import { Button, Checkbox, Form } from 'semantic-ui-react'
 
 export default () => (
   <Form>
@@ -11,6 +11,9 @@ export default () => (
       <label>Password</label>
       <input placeholder="Password" />
     </Form.Field>
-    <Button type="submit">Login</Button>
+    <Form.Field>
+      <Checkbox label="I agree to the Terms and Conditions" />
+    </Form.Field>
+    <Button type="submit">Sign Up</Button>
   </Form>
 )
