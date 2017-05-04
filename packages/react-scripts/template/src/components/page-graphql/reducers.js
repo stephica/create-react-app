@@ -12,6 +12,5 @@ export default (state = {}, action) => {
   }
 }
 
-export const getSender = state => {
+export const getSender = state =>
   state && state.getBySender && state.getBySender.sender
-}

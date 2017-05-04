@@ -2,9 +2,7 @@ import { connect } from 'react-redux'
 import Graphql from './graphql'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import { withState } from 'recompose'
 import { queryBySender } from './actions'
-import getSender from './reducers'
 
 function mapDispatchToProps(dispatch) {
   return {
