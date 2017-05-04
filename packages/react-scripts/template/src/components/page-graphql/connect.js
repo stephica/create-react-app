@@ -1,21 +1,42 @@
 import { connect } from 'react-redux'
-import _Graphql from './graphql'
+import Graphql from './graphql'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 import { withState } from 'recompose'
-import { getBySender } from './actions'
+import { queryBySender } from './actions'
+import getSender from './reducers'
 
 function mapDispatchToProps(dispatch) {
   return {
     search: sender => {
-      dispatch(getBySender(sender))
+      dispatch(queryBySender(sender))
     }
   }
 }
 
-const enhance = withState(
-  'address',
-  'setAddress',
-  '0xc7d3e431be6222543364408a94c12c0d089be305'
-)
-const Graphql = enhance(_Graphql)
+function mapStateToProps(state, props) {
+  return {
+    sender: state && state.getBySender && state.getBySender.sender
+  }
+}
 
-export default connect(null, mapDispatchToProps)(Graphql)
+const getBySenderQuery = gql`query getBySender($sender: String!) { 
+  getBySender(sender: $sender) {
+    sender,
+    recipient,
+    tokenStandard, 
+    parentTrace
+  } 
+}`
+
+const GraphqlWithData = graphql(getBySenderQuery, {
+  options: props => {
+    return {
+      fetchPolicy: 'network-only',
+      variables: {
+        sender: props.sender
+      }
+    }
+  }
+})(Graphql)
+export default connect(mapStateToProps, mapDispatchToProps)(GraphqlWithData)

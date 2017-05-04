@@ -3,32 +3,38 @@ import { string, func, bool, shape, object, arrayOf } from 'prop-types'
 import Buffer from '../balanc3-components/buffer'
 import { Input, Button } from 'semantic-ui-react'
 
-const GraphQl = ({ address, setAddress, search, data }) => {
-  const changehandler = e => setAddress(e.target.value)
-  const clickhandler = () => {
-    search(address)
+const GraphQl = ({
+  search,
+  sender,
+  data: { loading, getBySender, refetch }
+}) => {
+  const clickhandler = e => {
+    search(e.target.previousElementSibling.value)
+    refetch()
   }
   const Tx = ({ sender, recipient, tokenStandard, parentTrace }) => (
-    <div style={{ marginTop: '20px' }}>
-      <p>sender:{sender}</p>
-      <p>recipient:{recipient}</p>
-      <p>tokenStandard:{tokenStandard}</p>
-      <p>parentTrace:{parentTrace}</p>
-    </div>
+    <span>
+      <p><b>sender</b>: {sender}</p>
+      <p><b>recipient</b>: {recipient}</p>
+      <p><b>tokenStandard</b>: {tokenStandard}</p>
+      <p><b>parentTrace</b>: {parentTrace}</p>
+    </span>
   )
   return (
     <Buffer>
       <h2>GraphQl Example</h2>
       <Input
-        value={address}
         fluid
-        onChange={changehandler}
         style={{ maxWidth: '600px' }}
         action={<Button onClick={clickhandler}> Search </Button>}
       />
-      {data.getBySender &&
-        data.getBySender.map((tx, i) => <Tx {...tx} key={i} />)}
-      {data.loading && 'loading...'}
+      <div style={{ marginTop: '20px' }}>
+        {getBySender &&
+          !loading &&
+          getBySender.map((tx, i) => <Tx {...tx} key={i} />)}
+        {loading && 'loading...'}
+
+      </div>
     </Buffer>
   )
 }
