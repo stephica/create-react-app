@@ -33,7 +33,10 @@ const GraphQl = ({
           !loading &&
           getBySender.map((tx, i) => <Tx {...tx} key={i} />)}
         {loading && 'loading...'}
-
+        {getBySender &&
+          !getBySender.length &&
+          !loading &&
+          'No results, try searching for: 0xc7d3e431be6222543364408a94c12c0d089be305'}
       </div>
     </Buffer>
   )

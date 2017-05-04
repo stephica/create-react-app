@@ -34,7 +34,7 @@ const GraphqlWithData = graphql(getBySenderQuery, {
     return {
       fetchPolicy: 'network-only',
       variables: {
-        sender: props.sender
+        sender: props.sender || ''
       }
     }
   }
