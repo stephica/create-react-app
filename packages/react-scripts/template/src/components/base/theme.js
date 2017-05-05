@@ -14,6 +14,6 @@ const theme = {
   dark: 'black',
   black: 'black',
   white: 'white',
-  warning: 'orange',
-};
-export default theme;
+  warning: 'orange'
+}
+export default theme

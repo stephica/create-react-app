@@ -6,15 +6,13 @@ import { createLogicMiddleware } from 'redux-logic'
 import { ApolloClient } from 'react-apollo'
 import graphqlLogic from '../components/page-graphql/logic'
 import personLogic from '../components/page-redux-example/peopleContainer/logic'
+import loginLogic from '../components/balanc3-components/login-modal/logic'
 
-const logicMiddleware = createLogicMiddleware([...personLogic, ...graphqlLogic])
+const logicMiddleware = createLogicMiddleware([...personLogic, ...graphqlLogic, ...loginLogic])
 const apolloClient = new ApolloClient()
 
 // Allows Redux Devtools
-const composeEnhancers = typeof window === 'object' &&
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-  : compose
+const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose
 
 const middleware = applyMiddleware(logicMiddleware)
 const enhancer = composeEnhancers(middleware)

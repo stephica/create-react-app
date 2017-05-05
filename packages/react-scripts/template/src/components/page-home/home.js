@@ -2,7 +2,6 @@ import React from 'react'
 import { string } from 'prop-types'
 import Buffer from '../balanc3-components/buffer'
 import StyledLink from '../balanc3-components/styled-link'
-import { LoginModal } from '../balanc3-components'
 
 const ListItem = ({ to, label }) => (
   <li>
@@ -26,20 +25,11 @@ export default () => (
       <ListItem to="http://redux.js.org" label="redux" />
       <ListItem to="https://github.com/acdlite/recompose" label="recompose" />
       <ListItem to="https://semantic-ui.com/" label="semantic ui" />
-      <ListItem
-        to="https://github.com/reacttraining/react-router"
-        label="react router"
-      />
+      <ListItem to="https://github.com/reacttraining/react-router" label="react router" />
       <ListItem to="https://styled-components.com/" label="styled-components" />
-      <ListItem
-        to="https://github.com/jeffbski/redux-logic"
-        label="redux-logic"
-      />
-      <ListItem
-        to="https://github.com/apollographql/apollo-client"
-        label="graphql & apollo"
-      />
+      <ListItem to="https://github.com/jeffbski/redux-logic" label="redux-logic" />
+      <ListItem to="https://github.com/apollographql/apollo-client" label="graphql & apollo" />
+      <ListItem to="https://github.com/github/fetcht" label="fetch polyfill" />
     </ul>
-    <LoginModal />
   </Buffer>
 )

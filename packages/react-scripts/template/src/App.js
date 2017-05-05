@@ -5,12 +5,14 @@ import GraphQl from './components/page-graphql'
 import { Route } from 'react-router-dom'
 import Home from './components/page-home'
 import Header from './components/header'
+import { LoginModal } from './components/balanc3-components'
 
 class App extends Component {
   render() {
     baseStyles()
     return (
       <div>
+        <LoginModal />
         <Header />
         <Route exact path="/" component={Home} />
         <Route exact path="/redux" component={ReduxExample} />

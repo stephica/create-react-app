@@ -16,6 +16,7 @@ const HeaderRow = styled(HeaderSpace)`
   position: fixed;
   top: 0;
   padding: 20px;
+  justify-content: space-between;
 `
 
 const HeaderLink = styled(Link)`
@@ -26,15 +27,19 @@ const HeaderLink = styled(Link)`
 const Header = () => {
   const loginclick = () => dispatch(showLoginModal())
   return (
-    <d>
+    <div>
       <HeaderSpace />
       <HeaderRow alignItems="center">
-        <HeaderLink to="/" style={{ margin: '0 60px 0 0' }}> Balanc3 Starter </HeaderLink>
-        <HeaderLink to="/Redux">Redux</HeaderLink>
-        <HeaderLink to="/GraphQl">GraphQl</HeaderLink>
-        <span style={{ color: 'white', cursor: 'pointer' }} onClick={loginclick}> Login </span>
+        <div>
+          <HeaderLink to="/" style={{ margin: '0 60px 0 0' }}> Balanc3 Starter </HeaderLink>
+          <HeaderLink to="/Redux">Redux</HeaderLink>
+          <HeaderLink to="/GraphQl">GraphQl</HeaderLink>
+        </div>
+        <div>
+          <span style={{ color: 'white', cursor: 'pointer' }} onClick={loginclick}> Login </span>
+        </div>
       </HeaderRow>
-    </d>
+    </div>
   )
 }
 

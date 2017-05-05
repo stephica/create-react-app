@@ -1,6 +1,6 @@
 // SHOULD BE REPLACED WITH OUR FONT
 
-import { css } from 'styled-components';
+import { css } from 'styled-components'
 
 export default css`
 a{ text-decoration: none; }
@@ -116,4 +116,4 @@ h1,h2,h3,h4,h5,h6{ font-weight: 200; }
   font-weight: 400;
   src: url(https://jane.com/cdn.jane/fonts/icomoon.v19.woff) format("woff");
 }
-`;
+`
