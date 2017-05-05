@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { dispatch } from '../../utils'
+import {Link} from 'react-router-dom'
+import {dispatch} from '../../utils'
 import styled from 'styled-components'
 import Buffer from '../balanc3-components/buffer'
-import { showLoginModal } from '../balanc3-components/login-modal/actions'
+import {showLoginModal} from '../balanc3-components/login-modal/actions'
 
 const HeaderSpace = styled('div')`
   height: 60px;
@@ -16,6 +16,7 @@ const HeaderRow = styled(HeaderSpace)`
   background-color: ${props => props.theme.dark};
   position: fixed;
   top: 0;
+  padding: 20px;
 `
 
 const HeaderLink = styled(Link)`
@@ -29,19 +30,14 @@ const Header = () => {
     <d>
       <HeaderSpace />
       <HeaderRow alignItems="center">
-        <Buffer>
-          <HeaderLink to="/" style={{ margin: '0 60px 0 0' }}>
-            Balanc3 Starter
-          </HeaderLink>
-          <HeaderLink to="/Redux">Redux</HeaderLink>
-          <HeaderLink to="/GraphQl">GraphQl</HeaderLink>
-          <span
-            style={{ color: 'white', cursor: 'pointer' }}
-            onClick={loginclick}
-          >
-            {' '}Login{' '}
-          </span>
-        </Buffer>
+        <HeaderLink to="/" style={{margin: '0 60px 0 0'}}>
+          Balanc3 Starter
+        </HeaderLink>
+        <HeaderLink to="/Redux">Redux</HeaderLink>
+        <HeaderLink to="/GraphQl">GraphQl</HeaderLink>
+        <span style={{color: 'white', cursor: 'pointer'}} onClick={loginclick}>
+          {' '}Login{' '}
+        </span>
       </HeaderRow>
     </d>
   )
