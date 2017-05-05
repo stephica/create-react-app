@@ -30,14 +30,10 @@ const Header = () => {
     <d>
       <HeaderSpace />
       <HeaderRow alignItems="center">
-        <HeaderLink to="/" style={{margin: '0 60px 0 0'}}>
-          Balanc3 Starter
-        </HeaderLink>
+        <HeaderLink to="/" style={{margin: '0 60px 0 0'}}> Balanc3 Starter </HeaderLink>
         <HeaderLink to="/Redux">Redux</HeaderLink>
         <HeaderLink to="/GraphQl">GraphQl</HeaderLink>
-        <span style={{color: 'white', cursor: 'pointer'}} onClick={loginclick}>
-          {' '}Login{' '}
-        </span>
+        <span style={{color: 'white', cursor: 'pointer'}} onClick={loginclick}> Login </span>
       </HeaderRow>
     </d>
   )
