@@ -1,5 +1,6 @@
 import React from 'react'
-import { Button, Form } from 'semantic-ui-react'
+import { string, bool } from 'prop-types'
+import { Button, Form, Message } from 'semantic-ui-react'
 import { dispatch } from '../../../../utils'
 import { loginWith } from './actions'
 
@@ -17,8 +18,8 @@ const setPassword = e => {
   password = e.target.value
 }
 
-export default () => (
-  <Form>
+const LoginForm = ({ error, loading }) => (
+  <Form error={!!error} loading={loading}>
     <Form.Field>
       <label>Email</label>
       <input placeholder="Email" onChange={setEmail} />
@@ -28,5 +29,13 @@ export default () => (
       <input placeholder="Password" onChange={setPassword} />
     </Form.Field>
     <Button onClick={clickhandler}>Login</Button>
+    <Message error content={error} />
   </Form>
 )
+
+LoginForm.propTypes = {
+  error: string,
+  loading: bool
+}
+
+export default LoginForm

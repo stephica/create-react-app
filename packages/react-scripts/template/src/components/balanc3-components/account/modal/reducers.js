@@ -17,4 +17,4 @@ export default (state = {}, action) => {
   }
 }
 
-export const getActive = state => state.loginModal.activeState || null
+export const getModalState = state => state.account.modal.activeState || null
