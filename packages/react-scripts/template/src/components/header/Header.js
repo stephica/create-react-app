@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { dispatch } from '../../utils'
 import styled from 'styled-components'
 import Buffer from '../balanc3-components/buffer'
+import { showLoginModal } from '../balanc3-components/login-modal/actions'
 
 const HeaderSpace = styled('div')`
   height: 60px;
@@ -22,8 +24,9 @@ const HeaderLink = styled(Link)`
 `
 
 const Header = () => {
+  const loginclick = () => dispatch(showLoginModal())
   return (
-    <div>
+    <d>
       <HeaderSpace />
       <HeaderRow alignItems="center">
         <Buffer>
@@ -32,9 +35,15 @@ const Header = () => {
           </HeaderLink>
           <HeaderLink to="/Redux">Redux</HeaderLink>
           <HeaderLink to="/GraphQl">GraphQl</HeaderLink>
+          <span
+            style={{ color: 'white', cursor: 'pointer' }}
+            onClick={loginclick}
+          >
+            {' '}Login{' '}
+          </span>
         </Buffer>
       </HeaderRow>
-    </div>
+    </d>
   )
 }
 

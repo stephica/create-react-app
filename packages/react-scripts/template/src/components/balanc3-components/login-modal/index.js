@@ -1,1 +1,1 @@
-export { default } from './login-modal'
+export { default } from './connect'

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Button, Menu } from 'semantic-ui-react'
+import { Modal, Menu } from 'semantic-ui-react'
 import { LoginForm, SignupForm } from '../../balanc3-components'
 import styled from 'styled-components'
 
@@ -9,26 +9,24 @@ const SmallModal = styled(Modal)`
 `
 
 export default class LoginModal extends Component {
-  state = { activeItem: 'login' }
+  state = { activeItem: null }
   handleItemClick = (e, { label }) => this.setState({ activeItem: label })
   render() {
-    const { activeItem } = this.state
-    console.log('activeItem', activeItem)
+    const { activeItem, signup, hide, login } = this.props
+    console.log('rendered with active:', activeItem)
     return (
-      <SmallModal trigger={<Button>Show Modal</Button>}>
+      <SmallModal open={!!activeItem} onClose={hide}>
         <Modal.Content>
           <Menu pointing secondary>
             <Menu.Item
               name="Login"
-              label="login"
               active={activeItem === 'login'}
-              onClick={this.handleItemClick}
+              onClick={login}
             />
             <Menu.Item
               name="Sign Up"
-              label="signup"
               active={activeItem === 'signup'}
-              onClick={this.handleItemClick}
+              onClick={signup}
             />
           </Menu>
           {activeItem === 'login' && <LoginForm />}

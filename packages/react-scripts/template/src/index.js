@@ -15,7 +15,7 @@ const networkInterface = createNetworkInterface({
   uri: 'http://45.55.151.65/graphql'
 })
 const client = new ApolloClient({ networkInterface: networkInterface })
-const store = configureStore()
+export const store = configureStore()
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
