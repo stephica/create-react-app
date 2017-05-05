@@ -1,7 +1,7 @@
 import React from 'react'
 import { string, func } from 'prop-types'
 import { Modal, Menu } from 'semantic-ui-react'
-import { LoginForm, SignupForm } from '../../balanc3-components'
+import { LoginForm, SignupForm } from '../../../balanc3-components'
 import styled from 'styled-components'
 
 const SmallModal = styled(Modal)`

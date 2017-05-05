@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Form } from 'semantic-ui-react'
-import { dispatch } from '../../../utils'
+import { dispatch } from '../../../../utils'
 import { loginWith } from './actions'
 
 let email, password
@@ -20,7 +20,7 @@ const setPassword = e => {
 export default () => (
   <Form>
     <Form.Field>
-      <label>Email test</label>
+      <label>Email</label>
       <input placeholder="Email" onChange={setEmail} />
     </Form.Field>
     <Form.Field>
