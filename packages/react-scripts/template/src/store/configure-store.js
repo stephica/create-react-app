@@ -15,9 +15,6 @@ const apolloClient = new ApolloClient()
 // Allows Redux Devtools
 const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE_ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose
 
-const middleware = applyMiddleware(logicMiddleware)
-const enhancer = composeEnhancers(middleware)
-
 const rootReducer = combineReducers({
   people,
   getBySender,
@@ -28,5 +25,10 @@ const rootReducer = combineReducers({
 })
 
 export default initialState => {
-  return createStore(rootReducer, initialState, enhancer)
+  return createStore(
+    rootReducer,
+    initialState,
+    composeEnhancers(applyMiddleware(logicMiddleware))
+    // window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 }

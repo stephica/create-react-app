@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { dispatch } from '../../utils'
+import { dispatch } from '../../../utils'
 import styled from 'styled-components'
-import { showLoginModal } from '../balanc3-components/account/modal/actions'
+import { showLoginModal } from '../account/modal/actions'
 
 const HeaderSpace = styled('div')`
   height: 60px;

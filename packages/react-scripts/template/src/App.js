@@ -4,7 +4,7 @@ import ReduxExample from './components/page-redux-example'
 import GraphQl from './components/page-graphql'
 import { Route } from 'react-router-dom'
 import Home from './components/page-home'
-import Header from './components/header'
+import Header from './components/balanc3-components/header'
 import { LoginModal } from './components/balanc3-components'
 
 class App extends Component {
