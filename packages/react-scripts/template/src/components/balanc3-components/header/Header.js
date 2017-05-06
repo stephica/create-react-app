@@ -1,4 +1,5 @@
 import React from 'react'
+import { string } from 'prop-types'
 import { Link } from 'react-router-dom'
 import { dispatch } from '../../../utils'
 import styled from 'styled-components'
@@ -24,7 +25,7 @@ const HeaderLink = styled(Link)`
   margin-right: 20px;
 `
 
-const Header = () => {
+const Header = ({ user }) => {
   const loginclick = () => dispatch(showLoginModal())
   return (
     <div>
@@ -32,15 +33,20 @@ const Header = () => {
       <HeaderRow alignItems="center">
         <div>
           <HeaderLink to="/" style={{ margin: '0 60px 0 0' }}> Balanc3 Starter </HeaderLink>
-          <HeaderLink to="/Redux">Redux</HeaderLink>
-          <HeaderLink to="/GraphQl">GraphQl</HeaderLink>
+          <HeaderLink to="/redux">Redux</HeaderLink>
+          <HeaderLink to="/graphql">GraphQl</HeaderLink>
         </div>
         <div>
-          <span style={{ color: 'white', cursor: 'pointer' }} onClick={loginclick}> Login </span>
+          {user && <HeaderLink to="/account">{user}</HeaderLink>}
+          {!user && <span style={{ color: 'white', cursor: 'pointer' }} onClick={loginclick}> Login </span>}
         </div>
       </HeaderRow>
     </div>
   )
+}
+
+Header.propTypes = {
+  user: string
 }
 
 export default Header

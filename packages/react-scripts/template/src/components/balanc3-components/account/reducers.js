@@ -8,14 +8,12 @@ const user = (state = {}, action) => {
     case $userReceived:
       return {
         ...state,
-        passportToken: action.passportToken
+        ...action.user
       }
     default:
       return state
   }
 }
-
-export const getPassportToken = state => state.account.passportToken || null
 
 export default combineReducers({
   loginForm,
@@ -24,3 +22,5 @@ export default combineReducers({
 })
 
 export const getLoginFormError = state => state.account.loginForm.error
+export const isUser = state => !!state.account.user
+export const getUser = state => state.account.user
