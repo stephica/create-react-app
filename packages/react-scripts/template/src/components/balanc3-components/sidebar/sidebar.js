@@ -1,32 +1,31 @@
 import React from 'react'
-import { string, func } from 'prop-types'
-import { Modal, Menu } from 'semantic-ui-react'
-import { LoginForm, SignupForm } from '../../../balanc3-components'
-import styled from 'styled-components'
+import { bool, func } from 'prop-types'
+import { Sidebar, Menu, Icon } from 'semantic-ui-react'
 
-const SmallModal = styled(Modal)`
-  width: 400px !important;
-  margin-left: -200px !important; // only left to not mess with Semantic UI
-`
-
-const LoginModal = ({ activeItem, signup, hide, login }) => (
-  <SmallModal open={!!activeItem} onClose={hide}>
-    <Modal.Content>
-      <Menu pointing secondary>
-        <Menu.Item name="Login" active={activeItem === 'login'} onClick={login} />
-        <Menu.Item name="Sign Up" active={activeItem === 'signup'} onClick={signup} />
-      </Menu>
-      {activeItem === 'login' && <LoginForm />}
-      {activeItem === 'signup' && <SignupForm />}
-    </Modal.Content>
-  </SmallModal>
+const _Sidebar = ({ open, hide }) => (
+  <Sidebar as={Menu} animation="overlay" width="thin" direction="right" visible={open} icon="labeled" vertical inverted>
+    <Menu.Item name="home">
+      <Icon name="home" />
+      Home
+    </Menu.Item>
+    <Menu.Item name="gamepad">
+      <Icon name="gamepad" />
+      Games
+    </Menu.Item>
+    <Menu.Item name="camera">
+      <Icon name="camera" />
+      Channels
+    </Menu.Item>
+    <Menu.Item name="close" onClick={hide}>
+      <Icon name="close" />
+      Close
+    </Menu.Item>
+  </Sidebar>
 )
 
-LoginModal.propTypes = {
-  activeItem: string,
-  signup: func,
-  hide: func,
-  login: func
+_Sidebar.propTypes = {
+  open: bool,
+  hide: func
 }
 
-export default LoginModal
+export default _Sidebar

@@ -1,9 +1,7 @@
 import React from 'react'
 import { string, func } from 'prop-types'
 import { Link } from 'react-router-dom'
-import { dispatch } from '../../../utils'
 import styled from 'styled-components'
-import { showLoginModal } from '../account/modal/actions'
 import Media from 'react-responsive'
 import { screenSizes } from '../../base/theme'
 import { Icon } from 'semantic-ui-react'
@@ -28,8 +26,7 @@ const HeaderLink = styled(Link)`
   margin-right: 20px;
 `
 
-const Header = ({ user, hide }) => {
-  const loginclick = () => dispatch(showLoginModal())
+const Header = ({ user, showSidebar, showLoginModal }) => {
   return (
     <div>
       <HeaderSpace />
@@ -44,10 +41,11 @@ const Header = ({ user, hide }) => {
             <div>
               <Media minWidth={screenSizes.small}>
                 {user && <HeaderLink to="/account">{user}</HeaderLink>}
-                {!user && <span style={{ color: 'white', cursor: 'pointer' }} onClick={loginclick}> Login </span>}
+                {!user && <span style={{ color: 'white', cursor: 'pointer' }} onClick={showLoginModal}> Login </span>}
               </Media>
               <Media maxWidth={screenSizes.small}>
-                <Icon name="content" style={{ color: 'white' }} />
+                <Icon name="content" style={{ color: 'white' }} onClick={showSidebar} />
+                <span style={{ color: 'white' }} onClick={showSidebar}>Menu</span>
               </Media>
             </div>
           </HeaderRow>
@@ -59,7 +57,8 @@ const Header = ({ user, hide }) => {
 
 Header.propTypes = {
   user: string,
-  hide: func
+  showSidebar: func,
+  showLoginModal: func
 }
 
 export default Header

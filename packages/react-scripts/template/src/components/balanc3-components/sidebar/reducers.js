@@ -4,7 +4,7 @@ export const $showSidebar = 'SHOW_SIDEBAR'
 export const showSidebar = makeActionCreator($showSidebar)
 
 export const $hideSidebar = 'HIDE_SIDEBAR'
-export const hideLoginModal = makeActionCreator($hideSidebar)
+export const hideSidebar = makeActionCreator($hideSidebar)
 
 export default (state = {}, action) => {
   switch (action.type) {

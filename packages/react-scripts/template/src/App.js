@@ -6,7 +6,7 @@ import { Route } from 'react-router-dom'
 import Home from './components/page-home'
 import Header from './components/balanc3-components/header'
 import Account from './components/balanc3-components/page-account'
-import { LoginModal } from './components/balanc3-components'
+import { LoginModal, Sidebar } from './components/balanc3-components'
 
 class App extends Component {
   render() {
@@ -14,6 +14,7 @@ class App extends Component {
     return (
       <div>
         <LoginModal />
+        <Sidebar />
         <Header />
         <Route exact path="/" component={Home} />
         <Route exact path="/redux" component={ReduxExample} />

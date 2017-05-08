@@ -1,12 +1,16 @@
 import { connect } from 'react-redux'
 import { getUser } from '../account/reducers'
 import { showSidebar } from '../sidebar/reducers'
+import { showLoginModal } from '../account/modal/actions'
 import Header from './header'
 
 function mapDispatchToProps(dispatch) {
   return {
     showSidebar: () => {
       dispatch(showSidebar())
+    },
+    showLoginModal: () => {
+      dispatch(showLoginModal())
     }
   }
 }
