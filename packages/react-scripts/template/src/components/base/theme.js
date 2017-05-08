@@ -23,6 +23,11 @@ export const dimmensions = {
 
 const theme = {
   default: 'gray',
+  lighterGray: '#ddd',
+  lightGray: '#999',
+  gray: '#666',
+  darkGray: '#333',
+  darkerGray: '#222',
   primary: 'green',
   secondary: 'blue',
   alternate: 'lightBlue',

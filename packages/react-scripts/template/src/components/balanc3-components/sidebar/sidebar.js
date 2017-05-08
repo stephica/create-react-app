@@ -1,8 +1,19 @@
 import React from 'react'
 import { bool, func } from 'prop-types'
-import { Sidebar, Menu, Icon, Dimmer } from 'semantic-ui-react'
+import { Sidebar, Menu, Dimmer } from 'semantic-ui-react'
 import styled from 'styled-components'
+import OptionalLink from '../optional-link'
 
+const SidebarLink = styled(OptionalLink)`
+  &{
+    color: ${props => props.theme.lighterGray};
+    display: flex;
+    padding: 20px;
+    cursor: pointer;
+    border-bottom: ${props => '1px solid ' + props.theme.darkGray};
+    &:hover{ color: ${props => props.theme.white}}
+  }
+`
 const LayeredSidebar = styled(Sidebar)`
   &&&&{
     width: 90%;
@@ -18,21 +29,15 @@ const LayeredDimmer = styled(Dimmer)`
   }
 `
 
-const _Sidebar = ({ open, hide }) => (
+const _Sidebar = ({ open, hide, login, loggedIn }) => (
   <span>
-    <LayeredSidebar as={Menu} animation="overlay" direction="right" visible={open} icon="labeled" vertical inverted>
-      <Menu.Item name="home">
-        <Icon name="home" />
-        Home
-      </Menu.Item>
-      <Menu.Item name="gamepad">
-        <Icon name="gamepad" />
-        Games
-      </Menu.Item>
-      <Menu.Item name="camera">
-        <Icon name="camera" />
-        Channels
-      </Menu.Item>
+    <LayeredSidebar as={Menu} animation="overlay" direction="right" visible={open} vertical inverted>
+      <div onClick={hide}>
+        {!loggedIn && <SidebarLink onClick={login}>Login</SidebarLink>}
+        {loggedIn && <SidebarLink to="/account">Account</SidebarLink>}
+        <SidebarLink to="/redux">Redux</SidebarLink>
+        <SidebarLink to="/graphql">GraphQl</SidebarLink>
+      </div>
     </LayeredSidebar>
     <LayeredDimmer active={open} onClickOutside={hide} page />
   </span>
@@ -40,7 +45,9 @@ const _Sidebar = ({ open, hide }) => (
 
 _Sidebar.propTypes = {
   open: bool,
-  hide: func
+  loggedIn: bool,
+  hide: func,
+  login: func
 }
 
 export default _Sidebar

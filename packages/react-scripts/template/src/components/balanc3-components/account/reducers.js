@@ -23,4 +23,5 @@ export default combineReducers({
 
 export const getLoginFormError = state => state.account.loginForm.error
 export const isUser = state => !!state.account.user
+export const isLoggedIn = state => !!Object.keys(state.account.user).length
 export const getUser = state => state.account.user

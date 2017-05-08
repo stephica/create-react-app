@@ -14,7 +14,7 @@ const HeaderSpace = styled('div')`
 `
 
 const HeaderRow = styled(HeaderSpace)`
-  background-color: ${props => props.theme.dark};
+  background-color: ${({ theme }) => theme.darkGray};
   position: fixed;
   top: 0;
   padding: 20px;
@@ -43,7 +43,7 @@ const Header = ({ user, sidebarOpen, showSidebar, hideSidebar, showLoginModal })
                 {user && <HeaderLink to="/account">{user}</HeaderLink>}
                 {!user && <span style={{ color: 'white', cursor: 'pointer' }} onClick={showLoginModal}> Login </span>}
               </Media>
-              <Media maxWidth={screenSizes.small} onClick={sidebarOpen ? hideSidebar : showSidebar}>
+              <Media maxWidth={screenSizes.small} onClick={sidebarOpen ? hideSidebar : showSidebar} style={{ cursor: 'pointer' }}>
                 <Icon name={sidebarOpen ? 'close' : 'content'} style={{ color: 'white' }} />
                 <span style={{ color: 'white' }} onClick={showSidebar}>{sidebarOpen ? 'Close' : 'Menu'}</span>
               </Media>

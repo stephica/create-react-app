@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
-import { getModalState } from './reducers'
-import { showLoginModal, hideLoginModal } from './actions'
+import { getModalState, showLoginModal, hideLoginModal } from './reducers'
 import LoginModal from './modal'
 
 function mapStateToProps(state, props) {

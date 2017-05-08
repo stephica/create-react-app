@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { getUser } from '../account/reducers'
 import AccountPage from './page-account'
-import { showLoginModal } from '../account/modal/actions'
+import { showLoginModal } from '../account/modal/reducers'
 
 function mapDispatchToProps(dispatch) {
   return {

@@ -1,7 +1,6 @@
 import { createLogic } from 'redux-logic'
 import { $loginWith, loginError } from './actions'
-import { getModalState } from '../modal/reducers'
-import { hideLoginModal } from '../modal/actions'
+import { getModalState, hideLoginModal } from '../modal/reducers'
 import { userReceived } from '../actions'
 import { loginUrl } from '../../../base/config'
 
