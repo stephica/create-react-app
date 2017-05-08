@@ -30,6 +30,7 @@ export default () => (
       <ListItem to="https://github.com/jeffbski/redux-logic" label="redux-logic" />
       <ListItem to="https://github.com/apollographql/apollo-client" label="graphql & apollo" />
       <ListItem to="https://github.com/github/fetcht" label="fetch polyfill" />
+      <ListItem to="https://github.com/contra/react-responsivet" label="react responsive" />
     </ul>
   </Buffer>
 )

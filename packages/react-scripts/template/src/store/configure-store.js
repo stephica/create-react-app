@@ -1,6 +1,7 @@
 import people from '../components/page-redux-example/peopleContainer/reducers'
 import getBySender from '../components/page-graphql/reducers'
 import account from '../components/balanc3-components/account/reducers'
+import sidebar from '../components/balanc3-components/sidebar/reducers'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { createLogicMiddleware } from 'redux-logic'
 import { ApolloClient } from 'react-apollo'
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   people,
   getBySender,
   account,
+  sidebar,
   apollo: apolloClient.reducer()
   // add additional reducers here
 })
