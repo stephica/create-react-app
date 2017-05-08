@@ -1,5 +1,5 @@
 import React from 'react'
-import { string, func } from 'prop-types'
+import { string, func, bool } from 'prop-types'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Media from 'react-responsive'
@@ -7,7 +7,7 @@ import { screenSizes } from '../../base/theme'
 import { Icon } from 'semantic-ui-react'
 
 const HeaderSpace = styled('div')`
-  height: 60px;
+  height: ${({ theme }) => theme.topBarHeight}px;
   display: flex;
   width: 100%;
   align-items: center;
@@ -26,7 +26,7 @@ const HeaderLink = styled(Link)`
   margin-right: 20px;
 `
 
-const Header = ({ user, showSidebar, showLoginModal }) => {
+const Header = ({ user, sidebarOpen, showSidebar, hideSidebar, showLoginModal }) => {
   return (
     <div>
       <HeaderSpace />
@@ -43,9 +43,9 @@ const Header = ({ user, showSidebar, showLoginModal }) => {
                 {user && <HeaderLink to="/account">{user}</HeaderLink>}
                 {!user && <span style={{ color: 'white', cursor: 'pointer' }} onClick={showLoginModal}> Login </span>}
               </Media>
-              <Media maxWidth={screenSizes.small}>
-                <Icon name="content" style={{ color: 'white' }} onClick={showSidebar} />
-                <span style={{ color: 'white' }} onClick={showSidebar}>Menu</span>
+              <Media maxWidth={screenSizes.small} onClick={sidebarOpen ? hideSidebar : showSidebar}>
+                <Icon name={sidebarOpen ? 'close' : 'content'} style={{ color: 'white' }} />
+                <span style={{ color: 'white' }} onClick={showSidebar}>{sidebarOpen ? 'Close' : 'Menu'}</span>
               </Media>
             </div>
           </HeaderRow>
@@ -57,7 +57,9 @@ const Header = ({ user, showSidebar, showLoginModal }) => {
 
 Header.propTypes = {
   user: string,
+  sidebarOpen: bool,
   showSidebar: func,
+  hideSidebar: func,
   showLoginModal: func
 }
 

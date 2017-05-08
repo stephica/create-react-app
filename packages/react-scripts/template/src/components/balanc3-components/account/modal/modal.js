@@ -5,8 +5,12 @@ import { LoginForm, SignupForm } from '../../../balanc3-components'
 import styled from 'styled-components'
 
 const SmallModal = styled(Modal)`
-  width: 400px !important;
-  margin-left: -200px !important; // only left to not mess with Semantic UI
+  &&&{
+    @media (min-width: ${({ theme }) => theme.small}) {
+      width: 400px;
+      margin-left: -200px; // only left to not mess with Semantic UI
+    }
+  }
 `
 
 const LoginModal = ({ activeItem, signup, hide, login }) => (

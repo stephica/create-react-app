@@ -12,6 +12,15 @@ export const screenSizes = {
   largest: '1820px'
 }
 
+export const zIndexes = {
+  sidebarZ: '2',
+  sidebarDimmerZ: '1'
+}
+
+export const dimmensions = {
+  topBarHeight: 60
+}
+
 const theme = {
   default: 'gray',
   primary: 'green',
@@ -23,6 +32,8 @@ const theme = {
   black: 'black',
   white: 'white',
   warning: 'orange',
-  ...screenSizes
+  ...screenSizes,
+  ...zIndexes,
+  ...dimmensions
 }
 export default theme
