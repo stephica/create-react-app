@@ -5,11 +5,13 @@ import sidebar from '../components/balanc3-components/sidebar/reducers'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { createLogicMiddleware } from 'redux-logic'
 import { ApolloClient } from 'react-apollo'
+import { reducer as formReducer } from 'redux-form'
 import graphqlLogic from '../components/page-graphql/logic'
 import personLogic from '../components/page-redux-example/peopleContainer/logic'
 import loginLogic from '../components/balanc3-components/account/login-form/logic'
+import signupLogic from '../components/balanc3-components/account/signup-form/logic'
 
-const logicMiddleware = createLogicMiddleware([...personLogic, ...graphqlLogic, ...loginLogic])
+const logicMiddleware = createLogicMiddleware([...personLogic, ...graphqlLogic, ...loginLogic, ...signupLogic])
 const apolloClient = new ApolloClient()
 
 const rootReducer = combineReducers({
@@ -17,6 +19,7 @@ const rootReducer = combineReducers({
   getBySender,
   account,
   sidebar,
+  form: formReducer,
   apollo: apolloClient.reducer()
   // add additional reducers here
 })

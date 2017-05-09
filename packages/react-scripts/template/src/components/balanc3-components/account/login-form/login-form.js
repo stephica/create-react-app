@@ -2,7 +2,7 @@ import React from 'react'
 import { string, bool } from 'prop-types'
 import { Button, Form, Message } from 'semantic-ui-react'
 import { dispatch } from '../../../../utils'
-import { loginWith } from './actions'
+import { loginWith } from './reducers'
 
 let email, password
 

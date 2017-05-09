@@ -9,14 +9,4 @@ function mapStateToProps(state, props) {
   }
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     login: () => dispatch(showLoginModal('login')),
-//     signup: () => dispatch(showLoginModal('signup')),
-//     hide: () => {
-//       dispatch(hideLoginModal())
-//     }
-//   }
-// }
-
 export default connect(mapStateToProps, null)(LoginForm)

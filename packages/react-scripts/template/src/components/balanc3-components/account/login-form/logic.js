@@ -1,5 +1,5 @@
 import { createLogic } from 'redux-logic'
-import { $loginWith, loginError } from './actions'
+import { $loginWith, loginError } from './reducers'
 import { getModalState, hideLoginModal } from '../modal/reducers'
 import { userReceived } from '../actions'
 import { loginUrl } from '../../../base/config'
