@@ -11,15 +11,16 @@ function mapStateToProps(state, props) {
   return {
     email: select(state, 'email'),
     password: select(state, 'password'),
+    name: select(state, 'name'),
     formError: getSignupFormError(state)
   }
 }
 
 function mergeProps(props, { dispatch }) {
-  const { email, password } = props
+  const { email, password, name } = props
   return {
     submitForm: e => dispatch(submit(formName)),
-    postSignup: () => dispatch(postSignup(email, password)),
+    postSignup: () => dispatch(postSignup(email, password, name)),
     hideLoginModal: () => dispatch(hideLoginModal()),
     ...props
   }

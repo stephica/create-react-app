@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 const UniformLabel = styled(Label)`
   &&&{
-    width: 80px;
+    width: 85px;
     display: flex;
     align-items: center;
   }
@@ -22,7 +22,7 @@ const ReduxFormInput = props => {
     <Form.Field>
       {overheadLabel && <label>{overheadLabel}</label>}
       <Input {...input} placeholder={placeholder} labelPosition={label ? 'left' : null}>
-        {label && <UniformLabel horizontal>{label}</UniformLabel>}
+        {label && <UniformLabel>{label}</UniformLabel>}
         <input />
       </Input>
       {showHint && <Hint basic pointing content={hint} />}

@@ -10,7 +10,8 @@ const signup = createLogic({
     console.log('signup post init:', action)
     const username = encodeURIComponent(action.email)
     const password = encodeURIComponent(action.password)
-    const encodedUrl = `${baseUrl}/signup?username=${username}&password=${password}`
+    const name = encodeURIComponent(action.name)
+    const encodedUrl = `${baseUrl}/signup?username=${username}&password=${password}&name=${name}`
 
     fetch(encodedUrl, {
       headers: {
