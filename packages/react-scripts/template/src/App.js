@@ -18,7 +18,7 @@ class App extends Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/redux" component={ReduxExample} />
         <Route exact path="/graphql" component={GraphQl} />
-        <Route exact path="/account" component={AccountPage} />
+        <Route path="/account" component={AccountPage} />
         <Route exact path="/terms" component={TermsPage} />
       </div>
     )

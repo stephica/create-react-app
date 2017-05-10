@@ -1,15 +1,15 @@
 import { createLogic } from 'redux-logic'
 import { $loginWith, loginError } from './reducers'
 import { getModalState, hideLoginModal } from '../modal/reducers'
-import { userReceived } from '../actions'
+import { userReceived } from '../reducers'
 import { loginUrl } from '../../../base/config'
 
 const login = createLogic({
   type: $loginWith,
   process({ getState, action }, dispatch, done) {
-    const username = encodeURIComponent(action.id)
+    const email = encodeURIComponent(action.id)
     const password = encodeURIComponent(action.password)
-    const encodedUrl = `${loginUrl}?username=${username}&password=${password}`
+    const encodedUrl = `${loginUrl}?email=${email}&password=${password}`
 
     fetch(encodedUrl, {
       headers: {

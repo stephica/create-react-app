@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { postSignup, getSignupFormError } from './reducers'
 import { hideLoginModal } from '../modal/reducers'
 import SignupForm from './signup-form'
+import { isValidEmail, isValidPassword } from '../logic'
 import { reduxForm, formValueSelector, submit } from 'redux-form'
 
 const formName = 'signup'
@@ -33,10 +34,10 @@ const validate = values => {
   }
   if (!values.email) {
     errors.email = 'Required'
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+  } else if (isValidEmail(values.email)) {
     errors.email = 'Invalid email address'
   }
-  if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/i.test(values.password)) {
+  if (isValidPassword(values.password)) {
     errors.password = 'Password should include 1 capital letter, 1 number, and be a minimum of 8 characters'
   }
   return errors

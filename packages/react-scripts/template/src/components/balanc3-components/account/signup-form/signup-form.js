@@ -11,9 +11,8 @@ const SignupForm = props => {
     <Form warning onSubmit={handleSubmit(postSignup)} error={!!formError}>
       <Field label="Name" name="name" placeholder="Elliot Alderson" component={ReduxFormInput} />
       <Field label="Email" name="email" placeholder="user@foo.com" component={ReduxFormInput} />
-      <Field label="Password" name="password" placeholder="1 capital, 1 number  8 Characters" component={ReduxFormInput} />
+      <Field label="Password" name="password" placeholder="1 capital, 1 number,  8 characters" component={ReduxFormInput} />
       <Form.Field>
-        {/* <p>Your password should include 1 capital letter, 1 number and a minimum of 8 characters</p> */}
         <p>By clicking you agree to our <Link to="/terms" onClick={hideLoginModal}>Terms & Conditions</Link></p>
       </Form.Field>
       <Message error content={formError} />
