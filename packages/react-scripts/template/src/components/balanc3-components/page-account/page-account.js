@@ -17,6 +17,7 @@ const AccountPage = ({ email, id, dispatchLogin, dispatchLogout }) => {
 AccountPage.propTypes = {
   email: string,
   dispatchLogin: func,
+  dispatchLogout: func,
   id: string
 }
 
