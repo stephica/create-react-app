@@ -1,8 +1,14 @@
 import { combineReducers } from 'redux'
-import { $userReceived } from './actions'
 import loginForm from './login-form/reducers'
 import signupForm, { getSignupFormError as signupError } from './signup-form/reducers'
 import modal from './modal/reducers'
+import { makeActionCreator } from '../../../utils'
+
+export const $userReceived = 'USER_RECEIVED'
+export const userReceived = makeActionCreator($userReceived, 'user')
+
+export const $logout = 'LOGOUT'
+export const logout = makeActionCreator($logout)
 
 const user = (state = {}, action) => {
   switch (action.type) {
@@ -11,6 +17,8 @@ const user = (state = {}, action) => {
         ...state,
         ...action.user
       }
+    case $logout:
+      return {}
     default:
       return state
   }
