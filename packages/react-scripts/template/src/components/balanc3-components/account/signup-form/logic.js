@@ -22,7 +22,6 @@ const signup = createLogic({
       .then(res => res.json())
       .then(res => {
         if (res.err) {
-          console.log('error recieved', res.err)
           dispatch(signupError(res.err))
         } else {
           dispatch(userReceived(res))

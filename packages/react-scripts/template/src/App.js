@@ -5,8 +5,7 @@ import GraphQl from './components/page-graphql'
 import { Route } from 'react-router-dom'
 import Home from './components/page-home'
 import Header from './components/balanc3-components/header'
-import Account from './components/balanc3-components/page-account'
-import { LoginModal, Sidebar } from './components/balanc3-components'
+import { LoginModal, Sidebar, TermsPage, AccountPage } from './components/balanc3-components'
 
 class App extends Component {
   render() {
@@ -19,7 +18,8 @@ class App extends Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/redux" component={ReduxExample} />
         <Route exact path="/graphql" component={GraphQl} />
-        <Route exact path="/account" component={Account} />
+        <Route exact path="/account" component={AccountPage} />
+        <Route exact path="/terms" component={TermsPage} />
       </div>
     )
   }
