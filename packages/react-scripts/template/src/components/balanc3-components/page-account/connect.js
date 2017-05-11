@@ -17,7 +17,8 @@ function mapStateToProps(state, props) {
   const user = getUser(state)
   return {
     email: user.email,
-    id: user.id
+    id: user.id || user._id,
+    user: user
   }
 }
 

@@ -1,24 +1,31 @@
 import React from 'react'
-import { string, func } from 'prop-types'
+import { func, object, string } from 'prop-types'
 import { Buffer } from '../../balanc3-components'
 import { Button } from 'semantic-ui-react'
 
-const AccountPage = ({ email, id, dispatchLogin, dispatchLogout }) => {
+const AccountPage = ({ user, dispatchLogin, dispatchLogout, error }) => {
+  const isUser = !!Object.keys(user).length
+  if (error) {
+    console.log('error handled', error)
+  }
   return (
     <Buffer>
       <h2>Account</h2>
-      {email && <p>email: {email}</p>}
-      {id && <p>id: {id}</p>}
-      {!email ? <Button onClick={dispatchLogin}>Login</Button> : <Button onClick={dispatchLogout}>Logout</Button>}
+      {isUser &&
+        <span>
+          <p style={{ whiteSpace: 'pre' }}>{JSON.stringify(user, null, '\t')}</p>
+          <Button onClick={dispatchLogout}>Logout</Button>
+        </span>}
+      {!isUser && <Button onClick={dispatchLogin}>Login</Button>}
     </Buffer>
   )
 }
 
 AccountPage.propTypes = {
-  email: string,
+  user: object,
   dispatchLogin: func,
-  dispatchLogout: func,
-  id: string
+  error: string,
+  dispatchLogout: func
 }
 
 export default AccountPage

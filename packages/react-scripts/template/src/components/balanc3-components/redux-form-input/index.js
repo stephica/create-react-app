@@ -11,7 +11,7 @@ const UniformLabel = styled(Label)`
   }
 `
 const Hint = styled(Label)` &&&{ background-color: ${props => props.theme.warning} } `
-const ErrorMessage = styled('p')` color: ${props => props.theme.red} `
+const ErrorMessage = styled('p')` color: ${props => props.theme.red}; text-align: left; `
 
 const ReduxFormInput = props => {
   const { overheadLabel, input, placeholder, label, hint, meta } = props

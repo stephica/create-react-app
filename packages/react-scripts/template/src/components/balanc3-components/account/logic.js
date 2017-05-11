@@ -8,16 +8,21 @@ export const isValidEmail = string => !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$
 const tokenStore = createLogic({
   type: $userReceived,
   process({ getState, action }, dispatch, done) {
-    const userToken = getUserToken(getState())
-    localStorage.setItem('userToken', userToken)
+    if (action.user.token) {
+      console.log('storing token locally:', action.user.token)
+      localStorage.setItem('userToken', action.user.token)
+    }
+    done()
   }
 })
 
 const logout = createLogic({
   type: $logout,
   process({ getState, action }, dispatch, done) {
-    const encodedUrl = `${baseUrl}/logout?token=${getUserToken(getState())}`
+    const encodedUrl = `${baseUrl}/logout?token=${getUserToken()}`
+    localStorage.removeItem('userToken')
     fetch(encodedUrl, { method: 'POST' })
+    done()
   }
 })
 

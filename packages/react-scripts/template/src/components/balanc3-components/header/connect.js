@@ -4,6 +4,7 @@ import { showSidebar, hideSidebar, getSidebarState } from '../sidebar/reducers'
 import { showLoginModal } from '../account/modal/reducers'
 // import gql from 'graphql-tag'
 // import { graphql } from 'react-apollo'
+// const localUserToken = localStorage.getItem('userToken')
 import Header from './header'
 
 function mapDispatchToProps(dispatch) {
@@ -27,10 +28,10 @@ function mapStateToProps(state, props) {
 
 // const HeaderWithData = graphql(getUserQuery, {
 //   options: props => {
+//     console.log('props:', props)
 //     return {
-//       fetchPolicy: 'network-only',
 //       variables: {
-//         token: props.userToken || ''
+//         token: localUserToken || ''
 //       }
 //     }
 //   }

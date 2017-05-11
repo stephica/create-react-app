@@ -12,9 +12,8 @@ function mapDispatchToProps(dispatch) {
   return {
     login: () => dispatch(showLoginModal('login')),
     signup: () => dispatch(showLoginModal('signup')),
-    hide: () => {
-      dispatch(hideLoginModal())
-    }
+    forgot: () => dispatch(showLoginModal('forgot')),
+    hide: () => dispatch(hideLoginModal())
   }
 }
 

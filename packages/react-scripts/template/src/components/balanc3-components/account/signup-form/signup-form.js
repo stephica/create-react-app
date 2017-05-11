@@ -9,14 +9,14 @@ const SignupForm = props => {
   const { handleSubmit, postSignup, formError, invalid, hideLoginModal } = props
   return (
     <Form warning onSubmit={handleSubmit(postSignup)} error={!!formError}>
-      <Field label="Name" name="name" placeholder="Elliot Alderson" component={ReduxFormInput} />
-      <Field label="Email" name="email" placeholder="user@foo.com" component={ReduxFormInput} />
-      <Field label="Password" name="password" placeholder="1 capital, 1 number,  8 characters" component={ReduxFormInput} />
+      <Field name="name" placeholder="Name" component={ReduxFormInput} />
+      <Field name="email" placeholder="Email" component={ReduxFormInput} />
+      <Field name="password" placeholder="Password" component={ReduxFormInput} />
       <Form.Field>
         <p>By clicking you agree to our <Link to="/terms" onClick={hideLoginModal}>Terms & Conditions</Link></p>
       </Form.Field>
       <Message error content={formError} />
-      <Button type="submit" disabled={invalid} color="green">Sign Up</Button>
+      <Button fluid type="submit" disabled={invalid} color="green">Sign Up</Button>
     </Form>
   )
 }

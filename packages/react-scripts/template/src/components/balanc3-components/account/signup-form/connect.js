@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { postSignup, getSignupFormError } from './reducers'
-import { hideLoginModal } from '../modal/reducers'
+import { hideLoginModal, showLoginModal } from '../modal/reducers'
 import SignupForm from './signup-form'
 import { isValidEmail, isValidPassword } from '../logic'
 import { reduxForm, formValueSelector, submit } from 'redux-form'
@@ -23,6 +23,7 @@ function mergeProps(props, { dispatch }) {
     submitForm: e => dispatch(submit(formName)),
     postSignup: () => dispatch(postSignup(email, password, name)),
     hideLoginModal: () => dispatch(hideLoginModal()),
+    login: () => dispatch(showLoginModal('login')),
     ...props
   }
 }

@@ -10,8 +10,9 @@ import graphqlLogic from '../components/page-graphql/logic'
 import personLogic from '../components/page-redux-example/peopleContainer/logic'
 import loginLogic from '../components/balanc3-components/account/login-form/logic'
 import signupLogic from '../components/balanc3-components/account/signup-form/logic'
+import accountLogic from '../components/balanc3-components/account/logic'
 
-const logicMiddleware = createLogicMiddleware([...personLogic, ...graphqlLogic, ...loginLogic, ...signupLogic])
+const logicMiddleware = createLogicMiddleware([...personLogic, ...graphqlLogic, ...loginLogic, ...signupLogic, ...accountLogic])
 const apolloClient = new ApolloClient()
 
 const rootReducer = combineReducers({

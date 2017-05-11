@@ -14,7 +14,7 @@ const HeaderSpace = styled('div')`
 `
 
 const HeaderRow = styled(HeaderSpace)`
-  background-color: ${({ theme }) => theme.darkGray};
+  background-color: ${({ theme }) => theme.primary};
   position: fixed;
   top: 0;
   padding: 20px;
@@ -26,7 +26,8 @@ const HeaderLink = styled(Link)`
   margin-right: 20px;
 `
 
-const Header = ({ user, sidebarOpen, showSidebar, hideSidebar, showLoginModal }) => {
+const Header = props => {
+  const { user, sidebarOpen, showSidebar, hideSidebar, showLoginModal } = props
   return (
     <div>
       <HeaderSpace />
@@ -40,7 +41,7 @@ const Header = ({ user, sidebarOpen, showSidebar, hideSidebar, showLoginModal })
             </div>
             <div>
               <Media minWidth={screenSizes.small}>
-                {user && <HeaderLink to="/account">{user}</HeaderLink>}
+                {user && <HeaderLink style={{ margin: 0 }} to="/account">{user}</HeaderLink>}
                 {!user && <span style={{ color: 'white', cursor: 'pointer' }} onClick={showLoginModal}> Login </span>}
               </Media>
               <Media maxWidth={screenSizes.small} onClick={sidebarOpen ? hideSidebar : showSidebar} style={{ cursor: 'pointer' }}>
