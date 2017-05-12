@@ -3,6 +3,7 @@ import loginForm from './login-form/reducers'
 import signupForm, { getSignupFormError as signupError } from './signup-form/reducers'
 import modal, { showLoginModal as _showLoginModal } from './modal/reducers'
 import forgot from './forgot-password-form/reducers'
+import reset from './reset-password-form/reducers'
 import { makeActionCreator } from '../../../utils'
 
 export const $userReceived = 'USER_RECEIVED'
@@ -30,6 +31,7 @@ export default combineReducers({
   signupForm,
   user,
   forgot,
+  reset,
   modal
 })
 

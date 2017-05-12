@@ -8,7 +8,7 @@ export const isValidEmail = string => !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$
 const tokenStore = createLogic({
   type: $userReceived,
   process({ getState, action }, dispatch, done) {
-    if (action.user.token) {
+    if (action.user && action.user.token) {
       console.log('storing token locally:', action.user.token)
       localStorage.setItem('userToken', action.user.token)
     }

@@ -1,32 +1,33 @@
 import { connect } from 'react-redux'
 import ResetPasswordForm from './reset-password-form'
 import { isValidPassword } from '../logic'
-import { reduxForm } from 'redux-form'
-import { postResetPassword } from './reducers'
-// import { reduxForm, formValueSelector } from 'redux-form'
+import { postResetPassword, getResetPasswordState, getResetPasswordError } from './reducers'
+import { reduxForm, formValueSelector } from 'redux-form'
 
 const formName = 'resetPassword'
-// const select = formValueSelector(formName)
+const select = formValueSelector(formName)
 
 function mapStateToProps(state, props) {
-  return {}
-}
-
-function mapDispatchToProps(dispatch) {
   return {
-    resetPassword: () => dispatch(postResetPassword())
+    newPassword: select(state, 'password'),
+    formState: getResetPasswordState(state),
+    formError: getResetPasswordError(state)
   }
 }
 
-// function mergeProps(props, { dispatch }) {
-//   return {
-//   }
-// }
+function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    resetPassword: newPassword => dispatch(postResetPassword(newPassword))
+  }
+}
 
 const validate = values => {
   const errors = {}
   if (isValidPassword(values.password)) {
     errors.password = 'Password should include 1 capital letter, 1 number, and be a minimum of 8 characters'
+  }
+  if (values.password !== values.confirmPassword) {
+    errors.confirmPassword = 'Passwords do not match'
   }
   return errors
 }

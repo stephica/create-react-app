@@ -11,9 +11,10 @@ import personLogic from '../components/page-redux-example/peopleContainer/logic'
 import loginLogic from '../components/balanc3-components/account/login-form/logic'
 import signupLogic from '../components/balanc3-components/account/signup-form/logic'
 import accountLogic from '../components/balanc3-components/account/logic'
+import resetLogic from '../components/balanc3-components/account/reset-password-form/logic'
 import forgotLogic from '../components/balanc3-components/account/forgot-password-form/logic'
 
-const logicMiddleware = createLogicMiddleware([...personLogic, ...graphqlLogic, ...loginLogic, ...signupLogic, ...accountLogic, ...forgotLogic])
+const logicMiddleware = createLogicMiddleware([...personLogic, ...graphqlLogic, ...loginLogic, ...signupLogic, ...accountLogic, ...forgotLogic, ...resetLogic])
 const apolloClient = new ApolloClient()
 
 const rootReducer = combineReducers({
