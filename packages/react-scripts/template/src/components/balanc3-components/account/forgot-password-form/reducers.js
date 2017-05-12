@@ -1,10 +1,10 @@
 import { makeActionCreator } from '../../../../utils'
 
 export const $postForgotPassword = 'POST_FORGOT_PASSWORD'
-export const postResetPassword = makeActionCreator($postForgotPassword, 'email')
+export const postForgotPassword = makeActionCreator($postForgotPassword, 'email')
 
-// export const $resetPasswordError = 'RESET_PASSWORD_ERROR'
-// export const signupError = makeActionCreator($resetPasswordError, 'error')
+export const $postForgotPasswordSuccess = 'POST_FORGOT_PASSWORD_SUCCESS'
+export const postForgotPasswordSuccess = makeActionCreator($postForgotPassword)
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -13,15 +13,9 @@ export default (state = {}, action) => {
         ...state,
         posted: true
       }
-    // case $resetPasswordError:
-    //   return {
-    //     ...state,
-    //     error: action.error,
-    //     loading: false
-    //   }
     default:
       return state
   }
 }
 
-// export const getResetPasswordError = state => state.account.resetPassword.error
+export const isForgotPosted = state => state.account.forgot.posted

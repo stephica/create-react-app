@@ -1,30 +1,30 @@
 import { connect } from 'react-redux'
 import ForgotPasswordForm from './forgot-password-form'
 import { isValidEmail } from '../logic'
-import { reduxForm } from 'redux-form'
-import { postResetPassword } from './reducers'
+import { reduxForm, formValueSelector } from 'redux-form'
+import { postForgotPassword, isForgotPosted } from './reducers'
 
 const formName = 'forgotPassword'
+const selector = formValueSelector(formName)
 
 function mapStateToProps(state, props) {
-  return {}
-}
-
-function mapDispatchToProps(dispatch) {
   return {
-    forgotPassword: () => dispatch(postResetPassword())
+    posted: isForgotPosted(state),
+    email: selector(state, 'email')
   }
 }
 
-// function mergeProps(props, { dispatch }) {
-//   return {
-//   }
-// }
+function mergeProps({ email, posted }, { dispatch }) {
+  return {
+    postForgotPassword: () => dispatch(postForgotPassword(email)),
+    posted
+  }
+}
 
 const validate = values => {
   const errors = {}
   if (isValidEmail(values.email)) {
-    errors.email = 'Entered email is not valid'
+    errors.email = 'Email is invalid'
   }
   return errors
 }
@@ -34,4 +34,4 @@ const ReduxForgotPasswordForm = reduxForm({
   validate: validate
 })(ForgotPasswordForm)
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReduxForgotPasswordForm)
+export default connect(mapStateToProps, null, mergeProps)(ReduxForgotPasswordForm)

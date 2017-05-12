@@ -15,7 +15,11 @@ const SmallModal = styled(Modal)`
   }
 `
 const BottomSection = styled('div')` margin-top: 30px; `
-const BottomLink = styled('p')` margin: 0; cursor: pointer; `
+const BottomLink = styled('p')` 
+  margin: 0; 
+  cursor: pointer;
+  color: ${props => props.theme.lightGray}
+`
 
 const LoginModal = ({ activeItem, signup, hide, login, forgot }) => (
   <SmallModal open={!!activeItem} onClose={hide}>

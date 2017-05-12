@@ -5,8 +5,8 @@ import { baseUrl } from '../../../base/config'
 const ForgotPassword = createLogic({
   type: $postForgotPassword,
   process({ getState, action }, dispatch, done) {
-    console.log('postForgotPassword logic:', action)
-    fetch(baseUrl)
+    const forgotUrl = `${baseUrl}/forgot?email=${action.email}`
+    fetch(forgotUrl, { method: 'POST' }).then(res => res.json()).then(res => console.log('res:', res))
     done()
   }
 })

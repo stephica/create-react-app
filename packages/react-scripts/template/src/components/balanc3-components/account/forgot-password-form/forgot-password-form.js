@@ -3,21 +3,28 @@ import { bool, func, string } from 'prop-types'
 import { Button, Form, Message, Container } from 'semantic-ui-react'
 import { Field } from 'redux-form'
 import { ReduxFormInput } from '../../../balanc3-components'
-import { postResetPassword } from './reducers'
 
 const ForgotPasswordForm = props => {
-  const { error, invalid, handleSubmit } = props
+  const { error, invalid, handleSubmit, postForgotPassword, posted } = props
   return (
     <Container>
-      <p>
-        Enter the email address associated with your Balanc3 account.
-        We will send you a reset link to easily create a new password :)
-      </p>
-      <Form warning onSubmit={handleSubmit(postResetPassword)} error={!!error}>
-        <Field name="email" placeholder="Email" component={ReduxFormInput} />
-        <Message error content={error} />
-        <Button type="submit" disabled={invalid} color="green">Reset Password</Button>
-      </Form>
+      {!posted &&
+        <span>
+          <p>
+            Enter the email address associated with your Balanc3 account.
+            We will send you a reset link to easily create a new password :)
+          </p>
+          <Form warning onSubmit={handleSubmit(postForgotPassword)} error={!!error}>
+            <Field name="email" placeholder="Email" component={ReduxFormInput} />
+            <Message error content={error} />
+            <Button type="submit" disabled={invalid} color="green">Reset Password</Button>
+          </Form>
+        </span>}
+      {posted &&
+        <p>
+          We have sent an email with the instructions for resetting your password.
+          If you don't receive this email please check or junk mail or come back or send an email to support@balanc3.net
+        </p>}
     </Container>
   )
 }
@@ -25,8 +32,9 @@ const ForgotPasswordForm = props => {
 ForgotPasswordForm.propTypes = {
   handleSubmit: func,
   invalid: bool,
+  posted: bool,
   error: string,
-  postResetPassword: func
+  postForgotPassword: func
 }
 
 export default ForgotPasswordForm

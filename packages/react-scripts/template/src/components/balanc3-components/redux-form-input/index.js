@@ -10,6 +10,7 @@ const UniformLabel = styled(Label)`
     align-items: center;
   }
 `
+
 const Hint = styled(Label)` &&&{ background-color: ${props => props.theme.warning} } `
 const ErrorMessage = styled('p')` color: ${props => props.theme.red}; text-align: left; `
 
