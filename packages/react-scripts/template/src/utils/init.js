@@ -9,7 +9,7 @@ export default () => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      query: 'query ($token: String) { userAuths(token: $token) {_id, name, email, createdDate} }',
+      query: 'query ($token: String) { userAuths(token: $token) {_id, name, email, createdDate, country, fiatCurrency, wallets { _id, nickname, addresses { _id, nickname } }, addresses { _id, address, nickname } } }',
       variables: {
         token: getUserToken() || ''
       }
