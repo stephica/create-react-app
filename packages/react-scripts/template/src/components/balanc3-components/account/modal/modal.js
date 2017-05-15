@@ -1,7 +1,7 @@
 import React from 'react'
 import { string, func } from 'prop-types'
 import { Modal } from 'semantic-ui-react'
-import { LoginForm, SignupForm, ResetPasswordForm, ForgotPasswordForm } from '../../../balanc3-components'
+import { LoginForm, SignupForm, ResetPasswordForm, ForgotPasswordForm, Logo } from '../../../balanc3-components'
 import styled from 'styled-components'
 
 const SmallModal = styled(Modal)`
@@ -24,7 +24,8 @@ const BottomLink = styled('p')`
 const LoginModal = ({ activeItem, signup, hide, login, forgot }) => (
   <SmallModal open={!!activeItem} onClose={hide}>
     <Modal.Content>
-      <h2 style={{ padding: '30px' }}>Balanc3</h2>
+      <Logo dark large style={{ padding: '30px', display: 'block' }} />
+      {/* <h2 style={{ padding: '30px' }}>Balanc3</h2> */}
       {activeItem === 'login' && <LoginForm />}
       {activeItem === 'signup' && <SignupForm />}
       {activeItem === 'forgot' && <ForgotPasswordForm />}

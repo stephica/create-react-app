@@ -36,7 +36,7 @@ const Header = props => {
         {isSmall => (
           <HeaderRow alignItems="center">
             <div>
-              <HeaderLink to="/" style={{ margin: '0 60px 0 0' }}><Logo /></HeaderLink>
+              <HeaderLink to="/" style={{ margin: '0 60px 0 0' }}><Logo light /></HeaderLink>
               {isSmall && <HeaderLink to="/redux">Redux</HeaderLink>}
               {isSmall && <HeaderLink to="/graphql">GraphQl</HeaderLink>}
             </div>

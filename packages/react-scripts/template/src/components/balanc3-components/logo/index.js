@@ -1,14 +1,23 @@
 import React from 'react'
-import { string } from 'prop-types'
+import { string, bool } from 'prop-types'
+import styled from 'styled-components'
 
-const Logo = ({ type }) => (
-  <span>
+const StyleWrapper = styled('span')`
+  color: ${props => (props.light ? props.theme.white : props.theme.dark)};
+  font-size: ${props => (props.large ? '22px' : 'normal')};
+`
+
+const Logo = props => (
+  <StyleWrapper {...props}>
     Balanc3
-  </span>
+  </StyleWrapper>
 )
 
 Logo.propTypes = {
-  type: string
+  type: string,
+  large: bool,
+  light: bool,
+  dark: bool
 }
 
 export default Logo
