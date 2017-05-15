@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import ResetPasswordForm from './reset-password-form'
 import { isValidPassword } from '../logic'
+import { hideLoginModal } from '../modal/reducers'
 import { postResetPassword, getResetPasswordState, getResetPasswordError } from './reducers'
 import { reduxForm, formValueSelector } from 'redux-form'
 
@@ -17,7 +18,8 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    resetPassword: newPassword => dispatch(postResetPassword(newPassword))
+    resetPassword: newPassword => dispatch(postResetPassword(newPassword)),
+    hideLoginModal: () => dispatch(hideLoginModal())
   }
 }
 

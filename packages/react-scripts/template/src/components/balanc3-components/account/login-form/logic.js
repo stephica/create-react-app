@@ -10,7 +10,7 @@ const login = createLogic({
     const email = encodeURIComponent(action.id)
     const password = encodeURIComponent(action.password)
     const encodedUrl = `${loginUrl}?email=${email}&password=${password}`
-
+    console.log('login logic called with action:', action)
     fetch(encodedUrl, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -18,21 +18,20 @@ const login = createLogic({
       },
       method: 'POST'
     })
+      .then(res => res.json())
       .then(res => {
-        if (res.status !== 200) {
-          dispatch(loginError('A server error has occured'))
+        if (!res.err) {
+          dispatch(userReceived(res))
+          const isModal = getModalState(getState())
+          if (isModal) dispatch(hideLoginModal())
         } else {
-          return res.json()
+          const err = res.err || 'A server error has occured'
+          dispatch(loginError(err))
         }
-      })
-      .then(user => {
-        dispatch(userReceived(user))
-        const isModal = getModalState(getState())
-        if (isModal) dispatch(hideLoginModal())
       })
       .then(done)
       .catch(err => dispatch(loginError('An fetching error has occured')))
   }
 })
 
-export default [login]
+export default login

@@ -11,4 +11,4 @@ const ForgotPassword = createLogic({
   }
 })
 
-export default [ForgotPassword]
+export default ForgotPassword

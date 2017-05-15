@@ -1,4 +1,5 @@
 import { createLogic } from 'redux-logic'
+import { userReceived } from '../reducers'
 import { $postResetPassword, resetPasswordSuccess, resetPasswordError } from './reducers'
 import { baseUrl } from '../../../base/config'
 
@@ -7,13 +8,14 @@ const resetPassword = createLogic({
   process({ getState, action }, dispatch, done) {
     console.log('postResetPassword logic:', action)
     const token = action.token || window.location.href.substr(window.location.href.lastIndexOf('/') + 1)
-    const resetUrl = `${baseUrl}/reset/${token}?password=${action.newPassword}`
+    const resetUrl = `${baseUrl}/reset/${token}?password=${action.password}`
     fetch(resetUrl, { method: 'POST' })
       .then(res => res.json())
       .then(res => {
         if (!res.err) {
-          console.log('reset res:', res)
-          localStorage.setItem('userToken', res.token)
+          const { token, email, _id } = res
+          const user = { token, email, _id }
+          dispatch(userReceived(user))
           dispatch(resetPasswordSuccess())
         } else {
           dispatch(resetPasswordError(res.err))
@@ -27,4 +29,4 @@ const resetPassword = createLogic({
   }
 })
 
-export default [resetPassword]
+export default resetPassword

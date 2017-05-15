@@ -3,7 +3,10 @@
 import { css } from 'styled-components'
 
 export default css`
-a{ text-decoration: none; }
+a{ 
+  text-decoration: none;
+  &:hover { text-decoration: underline; color: inherit;}
+}
 h1,h2,h3,h4,h5,h6{ font-weight: 200; }
 @font-face {
   font-family: "Azo Sans";

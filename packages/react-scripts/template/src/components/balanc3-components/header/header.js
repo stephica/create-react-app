@@ -3,6 +3,7 @@ import { string, func, bool } from 'prop-types'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Media from 'react-responsive'
+import { Logo } from '../../balanc3-components'
 import { screenSizes } from '../../base/theme'
 import { Icon } from 'semantic-ui-react'
 
@@ -35,7 +36,7 @@ const Header = props => {
         {isSmall => (
           <HeaderRow alignItems="center">
             <div>
-              <HeaderLink to="/" style={{ margin: '0 60px 0 0' }}> Balanc3 Starter </HeaderLink>
+              <HeaderLink to="/" style={{ margin: '0 60px 0 0' }}><Logo /></HeaderLink>
               {isSmall && <HeaderLink to="/redux">Redux</HeaderLink>}
               {isSmall && <HeaderLink to="/graphql">GraphQl</HeaderLink>}
             </div>

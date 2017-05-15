@@ -35,4 +35,4 @@ const signup = createLogic({
   }
 })
 
-export default [signup]
+export default signup
