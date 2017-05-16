@@ -1,4 +1,4 @@
-{
+ {
   "parser": "babel-eslint",
   "plugins": [
     "jsx-a11y",
@@ -125,7 +125,7 @@
     ],
     "max-len": [
       "warn",
-      120
+      320
     ],
     "new-cap": [
       "error",
