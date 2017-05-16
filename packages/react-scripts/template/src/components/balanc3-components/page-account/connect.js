@@ -1,8 +1,12 @@
 import { connect } from 'react-redux'
-import { getUser, logout, getUserToken } from '../account/reducers'
+import { compose, lifecycle } from 'recompose'
+import { logout, getUserToken } from '../account/reducers'
 import AccountPage from './page-account'
 import { gql, graphql } from 'react-apollo'
 import { showLoginModal } from '../account/modal/reducers'
+import { reduxForm, formValueSelector } from 'redux-form'
+const form = 'update-account'
+const selector = formValueSelector(form)
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -15,33 +19,39 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state, props) {
-  const user = getUser(state)
   return {
-    email: user.email,
-    id: user.id || user._id,
-    user: user
+    user: selector(state, 'user'),
+    name: selector(state, 'name')
   }
 }
 
-// const userMutation = gql`mutation ($data: updateUserAuthsInputType!) { updateUserAuth(data: $data) }`
+const userMutation = gql`mutation ($data: updateUserAuthsInputType!) { updateUserAuth(data: $data) }`
 
-// const AccountPageWithData = graphql(userMutation, {
-//   props: ({ mutate }) => ({
-//     submit: props => {
-//       console.log('pre mutate call with props:', props)
-//       mutate({
-//         variables: {
-//           data: {
-//             token: getUserToken(),
-//             name: 'temporary name 2'
-//           }
-//         }
-//       })
-//     }
-//   })
-// })(AccountPage)
+const AccountPageWithMutation = graphql(userMutation, {
+  props: ({ mutate }) => ({
+    submitHandler: user => {
+      delete user.token
+      delete user.__typename
+      delete user._id
+      delete user.createdDate
+      delete user.wallets
+      delete user.addresses
+      mutate({
+        variables: {
+          data: {
+            token: getUserToken(),
+            ...user
+          }
+        }
+      }).then(res => {
+        console.log('response from mutation:', res)
+        // TODO:  Dispatch user recieved action
+      })
+    }
+  })
+})
 
-const userMutation = gql`
+const userQuery = gql`
   query ($token: String) {
     userAuths(token: $token) {
       _id, 
@@ -66,12 +76,25 @@ const userMutation = gql`
     } 
   }
 `
-const AccountPageWithData = graphql(userMutation, {
+const AccountPageWithData = graphql(userQuery, {
   options: {
     variables: {
       token: getUserToken() || ''
     }
   }
-})(AccountPage)
+})
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountPageWithData)
+// export default connect(mapStateToProps, mapDispatchToProps)(AccountPageWithData)
+export default compose(
+  AccountPageWithData,
+  AccountPageWithMutation,
+  connect(mapStateToProps, mapDispatchToProps),
+  reduxForm({ form }),
+  lifecycle({
+    componentDidUpdate() {
+      if (this.props.data.userAuths && !this.props.initialized) {
+        this.props.initialize({ user: this.props.data.userAuths })
+      }
+    }
+  })
+)(AccountPage)
