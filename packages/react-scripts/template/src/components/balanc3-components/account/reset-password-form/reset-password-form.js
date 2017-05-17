@@ -6,8 +6,7 @@ import { ReduxFormInput } from '../../../balanc3-components'
 
 const ResetPasswordForm = props => {
   const { invalid, handleSubmit, resetPassword, formState, formError, newPassword, hideLoginModal } = props
-  // const successState = formState === 'success'
-  const successState = true
+  const successState = formState === 'success'
   const errorState = formState === 'error'
   const loadingState = formState === 'loading'
   return (

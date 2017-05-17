@@ -4,6 +4,13 @@
 * for use in styled components
 *
 */
+
+export const boxShadows = {
+  tight: '0 5px 10px 0 rgba(0, 0, 0, 0.15)',
+  loose: '0 40px 80px 0 rgba(0, 0, 0, 0.15)',
+  inset: 'inset 0 1px 3px 0 rgba(0, 0, 0, 0.15);'
+}
+
 export const screenSizes = {
   small: '480px',
   medium: '768px',
@@ -14,7 +21,8 @@ export const screenSizes = {
 
 export const zIndexes = {
   sidebarZ: '2',
-  sidebarDimmerZ: '1'
+  sidebarDimmerZ: '1',
+  headerZ: '1'
 }
 
 export const dimmensions = {
@@ -46,6 +54,7 @@ const theme = {
   orange: 'orange',
   ...screenSizes,
   ...zIndexes,
-  ...dimmensions
+  ...dimmensions,
+  boxShadows
 }
 export default theme

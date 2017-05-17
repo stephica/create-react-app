@@ -1,9 +1,9 @@
 import React from 'react'
-import { string, func, bool } from 'prop-types'
+import { object, func, bool } from 'prop-types'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Media from 'react-responsive'
-import { Logo } from '../../balanc3-components'
+import { Logo, Avatar } from '../../balanc3-components'
 import { screenSizes } from '../../base/theme'
 import { Icon } from 'semantic-ui-react'
 
@@ -19,6 +19,7 @@ const HeaderRow = styled(HeaderSpace)`
   position: fixed;
   top: 0;
   padding: 20px;
+  z-index: ${props => props.theme.headerZ};
   justify-content: space-between;
 `
 
@@ -29,6 +30,7 @@ const HeaderLink = styled(Link)`
 
 const Header = props => {
   const { user, sidebarOpen, showSidebar, hideSidebar, showLoginModal } = props
+  const isUser = !!Object.keys(user).length
   return (
     <div>
       <HeaderSpace />
@@ -42,8 +44,8 @@ const Header = props => {
             </div>
             <div>
               <Media minWidth={screenSizes.small}>
-                {user && <HeaderLink style={{ margin: 0 }} to="/account">{user}</HeaderLink>}
-                {!user && <span style={{ color: 'white', cursor: 'pointer' }} onClick={showLoginModal}> Login </span>}
+                {isUser && <Link to="/account"> <Avatar style={{ margin: 0 }} user={user} /></Link>}
+                {!isUser && <span style={{ color: 'white', cursor: 'pointer' }} onClick={showLoginModal}> Login </span>}
               </Media>
               <Media maxWidth={screenSizes.small} onClick={sidebarOpen ? hideSidebar : showSidebar} style={{ cursor: 'pointer' }}>
                 <Icon name={sidebarOpen ? 'close' : 'content'} style={{ color: 'white' }} />
@@ -58,7 +60,7 @@ const Header = props => {
 }
 
 Header.propTypes = {
-  user: string,
+  user: object,
   sidebarOpen: bool,
   showSidebar: func,
   hideSidebar: func,

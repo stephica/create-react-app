@@ -30,12 +30,16 @@ const userMutation = gql`mutation ($data: updateUserAuthsInputType!) { updateUse
 const AccountPageWithMutation = graphql(userMutation, {
   props: ({ mutate }) => ({
     submitHandler: user => {
-      delete user.token
-      delete user.__typename
-      delete user._id
-      delete user.createdDate
-      delete user.wallets
-      delete user.addresses
+      try {
+        delete user.token
+        delete user.__typename
+        delete user._id
+        delete user.createdDate
+        delete user.wallets
+        delete user.addresses
+      } catch (err) {
+        console.log('error caught:', err)
+      }
       mutate({
         variables: {
           data: {
@@ -59,20 +63,7 @@ const userQuery = gql`
       email, 
       createdDate, 
       country, 
-      fiatCurrency, 
-      wallets { 
-        _id, 
-        nickname, 
-        addresses {
-          _id,
-          nickname
-        }
-      }, 
-      addresses {
-         _id, 
-         address, 
-         nickname 
-      } 
+      fiatCurrency 
     } 
   }
 `

@@ -15,7 +15,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state, props) {
   const user = getUser(state)
   return {
-    user: user.email,
+    user: user,
     userToken: getUserToken(state),
     sidebarOpen: getSidebarState(state)
   }
