@@ -9,7 +9,8 @@ const AccountPage = props => {
   const { dispatchLogin, dispatchLogout, error, submitHandler, user, handleSubmit } = props
   // const user = props.data.userAuths
   const isUser = user && !!Object.keys(user).length
-  const handler = () => {
+  const handler = ({ user }) => {
+    debugger
     submitHandler(user)
   }
   console.log('Account Rendered for :', user)
@@ -19,9 +20,8 @@ const AccountPage = props => {
   }
   return (
     <Buffer>
-      <h2>Account</h2>
       {isUser &&
-        <Form onSubmit={handleSubmit(handler)}>
+        <Form onSubmit={handleSubmit(handler)} style={{ maxWidth: '600px', margin: '0 auto' }}>
           {/* <p style={{ whiteSpace: 'pre' }}>{JSON.stringify(user, null, '\t')}</p> */}
           <Field name="user.name" placeholder="Name" component={ReduxFormInput} overheadLabel="Name" />
           <Field name="user.email" placeholder="Email" component={ReduxFormInput} overheadLabel="Email" />

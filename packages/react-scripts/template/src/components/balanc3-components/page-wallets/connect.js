@@ -18,7 +18,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const getWallets = gql`query ($token: String!) { userWallets(token: $token) { _id, name } }`
-const getAddresses = gql`query ($token: String!) { userAddresses(token: $token) { _id, name, address, wallet } }`
+// const getAddresses = gql`query ($token: String!) { userAddresses(token: $token) { _id, name, address, wallet } }`
 
 const WalletPageWithData = graphql(getWallets, {
   options: props => {
@@ -30,14 +30,14 @@ const WalletPageWithData = graphql(getWallets, {
   }
 })(WalletPage)
 
-const WalletPageWithAddressData = graphql(getAddresses, {
-  options: props => {
-    return {
-      variables: {
-        token: getUserToken()
-      }
-    }
-  }
-})(WalletPage)
+// const WalletPageWithAddressData = graphql(getAddresses, {
+//   options: props => {
+//     return {
+//       variables: {
+//         token: getUserToken()
+//       }
+//     }
+//   }
+// })(WalletPage)
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletPageWithData)

@@ -8,7 +8,6 @@ const ErrorMessage = styled('p')` color: ${props => props.theme.red}; text-align
 
 const ReduxFormInput = props => {
   const { overheadLabel, input, placeholder, label, hint, meta, options } = props
-  console.log('input passed into dropdown:', input)
   const _onchange = (param, data) => input.onChange(data.value)
 
   const { error, touched } = meta

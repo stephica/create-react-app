@@ -18,11 +18,11 @@ const logicMiddleware = createLogicMiddleware([...personLogic, ...graphqlLogic, 
 
 const rootReducer = combineReducers({
   form: formReducer,
-  apollo: apolloClient.reducer(),
   people: peopleReducer,
   getBySender: getBySenderReducer,
   sidebar: sidebarReducer,
-  account: accountReducer
+  account: accountReducer,
+  apollo: apolloClient.reducer()
   // add additional reducers here
 })
 

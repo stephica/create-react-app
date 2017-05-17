@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { compose, lifecycle } from 'recompose'
-import { logout, getUserToken, userReceived } from '../account/reducers'
+import { logout, getUserToken, userReceived, getUser } from '../account/reducers'
 import AccountForm from './update-account-form'
 import { gql, graphql } from 'react-apollo'
 import { showLoginModal } from '../account/modal/reducers'
@@ -20,8 +20,15 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state, props) {
+  // console.log('redux user', getUser(state))
+  // console.log('form user', selector(state, 'user'))
+  const reduxUser = getUser(state)
+  const formUser = selector(state, 'user')
   return {
-    user: selector(state, 'user'),
+    user: {
+      ...reduxUser,
+      ...formUser
+    },
     name: selector(state, 'name')
   }
 }
@@ -31,6 +38,7 @@ const userMutation = gql`mutation ($data: updateUserAuthsInputType!) { updateUse
 const AccountFormWithMutation = graphql(userMutation, {
   props: ({ mutate }) => ({
     submitHandler: user => {
+      console.log('mutation called', user)
       try {
         delete user.token
         delete user.__typename
@@ -41,8 +49,6 @@ const AccountFormWithMutation = graphql(userMutation, {
       } catch (err) {
         console.log('error caught:', err)
       }
-      const { country, email, fiatCurrency, name } = user
-      console.log('new country:', country)
       mutate({
         variables: {
           data: {
@@ -54,45 +60,32 @@ const AccountFormWithMutation = graphql(userMutation, {
         .then(res => {
           console.log('response from mutation:', res)
           dispatch(userReceived(res.data.updateUserAuth))
-          // TODO:  Dispatch user recieved action
         })
         .catch(err => {
-          debugger
+          console.error(err)
         })
     }
   })
 })
 
-const userQuery = gql`
-  query ($token: String) {
-    userAuths(token: $token) {
-      _id, 
-      name, 
-      email, 
-      createdDate, 
-      country, 
-      fiatCurrency 
-    } 
-  }
-`
-const AccountFormWithData = graphql(userQuery, {
-  options: {
-    variables: {
-      token: getUserToken() || ''
-    }
-  }
-})
-
-// export default connect(mapStateToProps, mapDispatchToProps)(AccountFormWithData)
 export default compose(
-  AccountFormWithData,
   AccountFormWithMutation,
   connect(mapStateToProps, mapDispatchToProps),
   reduxForm({ form }),
   lifecycle({
-    componentDidUpdate() {
-      if (this.props.data.userAuths && !this.props.initialized) {
-        this.props.initialize({ user: this.props.data.userAuths })
+    componentWillUpdate(nextProps) {
+      // INITIAL UPDATE
+      console.log('Will Update:', nextProps.user)
+      if (nextProps.user.email && !nextProps.initialized) {
+        console.log('Initializing', nextProps.user)
+        nextProps.initialize({ user: nextProps.user })
+      }
+    },
+    componentWillMount() {
+      // WHEN COMING FROM ANOTHER PAGE
+      console.log('Will Mount:', this.props.user)
+      if (this.props.user.email && !this.props.initialized) {
+        this.props.initialize({ user: this.props.user })
       }
     }
   })
