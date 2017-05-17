@@ -9,7 +9,11 @@ const GroupSummaryItem = styled('div')`
   justify-content: space-between;
 `
 const getTotalBalance = addresses => {
-  return addresses.map(el => Number(el.balance)).reduce((a, b) => Number(a) + Number(b)).toFixed(5)
+  if (addresses) {
+    return addresses.map(el => Number(el.balance)).reduce((a, b) => Number(a) + Number(b)).toFixed(5)
+  } else {
+    return 0
+  }
 }
 const getGroupNames = addresses => {
   return addresses.map(el => el.wallet).reduce((a, b) => {
@@ -53,13 +57,15 @@ const Address = ({ name, address, balance, tokenStandard, tokenName }) => {
 }
 
 const WalletPage = props => {
+  // const wallets = props.data.userAddresses
   const { wallets } = props
+  // const wallets = props.data.userWallets
+  // const addresses = props.data
   window.addresses = wallets
   // const groupNames = getGroupNames(wallets)
   const groups = getGroups(wallets)
   return (
     <Buffer>
-      <h2>Wallet</h2>
       <Card fluid>
         <Card.Content>
           <div style={{ textAlign: 'center' }}>
@@ -80,7 +86,7 @@ const WalletPage = props => {
                 <span>{`Total: ${getTotalBalance(group)}`}</span>
               </Fill>
               <Divider />
-              {group.map(address => <Address {...address} key={address.address} />)}
+              {group.map(address => <Address {...address} key={address._id} />)}
             </Card.Content>
           </Card>
         ))}

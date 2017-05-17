@@ -34,41 +34,9 @@ export default combineReducers({
   reset,
   modal
 })
-
-const dummyWalletData = [
-  {
-    name: 'name 1',
-    address: '0xalsdkjfaosdia98sd9f87as9d8f',
-    // createdDate: newDate,
-    tokenStandard: 'eth',
-    tokenName: 'ether',
-    tokenContract: '0xalsdkjfaosdia98sd9f87as9d8f',
-    balance: '4.232534',
-    wallet: '2'
-  },
-  {
-    name: 'name 2',
-    address: '0xa98s7df987a9ds8f7',
-    tokenStandard: 'eth',
-    tokenName: 'ether',
-    tokenContract: '0x0a980ds98f0a98sd0f98asdf',
-    balance: '3.98876876',
-    wallet: '1'
-  },
-  {
-    name: 'name 3',
-    address: '0x987087a0sdf98707333',
-    tokenStandard: 'eth',
-    tokenName: 'ether',
-    tokenContract: '0x098as9df098a09sd8',
-    balance: '3.756578',
-    wallet: '1'
-  }
-]
 export const getSignupFormError = signupError
 export const showLoginModal = _showLoginModal
 // export const getUserWallets = state => state.account.user.wallets
-export const getUserWallets = state => dummyWalletData
 export const getLoginFormError = state => state.account.loginForm.error
 export const isUser = state => !!state.account.user
 export const isLoggedIn = state => !!Object.keys(state.account.user).length
