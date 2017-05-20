@@ -1,96 +1,31 @@
 import React from 'react'
-import { Buffer, Fill, Row } from '../../balanc3-components'
-import { Header, Divider, Card } from 'semantic-ui-react'
-import styled from 'styled-components'
-
-const GroupSummaryItem = styled('div')`
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-`
-const getTotalBalance = addresses => {
-  if (addresses) {
-    return addresses.map(el => Number(el.balance)).reduce((a, b) => Number(a) + Number(b)).toFixed(5)
-  } else {
-    return 0
-  }
-}
-const getGroupNames = addresses => {
-  return addresses.map(el => el.wallet).reduce((a, b) => {
-    if (a.indexOf(b) < 0) a.push(b)
-    return a
-  }, [])
-}
-
-const getGroups = addresses => {
-  return getGroupNames(addresses).map(name => addresses.filter(adr => adr.wallet === name))
-}
-
-const GroupSummary = ({ group }) => {
-  return (
-    <GroupSummaryItem>
-      <div>
-        GroupName: {group[0].wallet}
-      </div>
-      <div>
-        {getTotalBalance(group)}
-      </div>
-
-    </GroupSummaryItem>
-  )
-}
-
-const Address = ({ name, address, balance, tokenStandard, tokenName }) => {
-  return (
-    <Row justifyContent="space-between">
-      <span> {name} </span>
-      <span> {address} </span>
-      <span> {tokenStandard} </span>
-      <span> {tokenName} </span>
-      <span> {balance} </span>
-      <span>
-        <div>rename</div>
-        <div>remove</div>
-      </span>
-    </Row>
-  )
-}
+import { Buffer } from '../../balanc3-components'
+import { Button } from 'semantic-ui-react'
+import { getGroups } from './logic'
+import WalletCard from './wallet-card'
+import OverallCard from './overall-card'
 
 const WalletPage = props => {
-  // const wallets = props.data.userAddresses
-  const { wallets } = props
-  // const wallets = props.data.userWallets
-  // const addresses = props.data
-  window.addresses = wallets
+  console.log('props:', props)
+  const addresses = props.data.userAddresses
+  const wallets = props.data.userWallets
+  const { showWalletModal } = props
+  // const { _wallets } = props
   // const groupNames = getGroupNames(wallets)
-  const groups = getGroups(wallets)
+  const groups = getGroups(addresses, wallets)
+  const hasGroups = groups && !!groups.length
   return (
     <Buffer>
-      <Card fluid>
-        <Card.Content>
-          <div style={{ textAlign: 'center' }}>
-            <Header size="large" style={{ margin: 0 }}>{getTotalBalance(wallets)}</Header>
-            <p>Overall Balance</p>
-          </div>
-          <Divider />
-          {groups && groups.map(group => <GroupSummary key={group[0].wallet} group={group} />)}
-          <div />
-        </Card.Content>
-      </Card>
-      {groups &&
-        groups.map(group => (
-          <Card fluid key={group[0].wallet}>
-            <Card.Content>
-              <Fill justifyContent="space-between">
-                <span>{`Group Name: ${group[0].wallet}`}</span>
-                <span>{`Total: ${getTotalBalance(group)}`}</span>
-              </Fill>
-              <Divider />
-              {group.map(address => <Address {...address} key={address._id} />)}
-            </Card.Content>
-          </Card>
-        ))}
+      <Button onClick={showWalletModal} style={{ marginBottom: '20px' }}>Add Wallet</Button>
+      {hasGroups &&
+        <span>
+          <OverallCard wallets={wallets} groups={groups} />
+          {groups && groups.map((group, i) => <WalletCard key={i} group={group} addresses={addresses} />)}
+        </span>}
+      wallets:
       <p style={{ whiteSpace: 'pre' }}>{JSON.stringify(wallets, null, '\t')}</p>
+      addresses:
+      <p style={{ whiteSpace: 'pre' }}>{JSON.stringify(addresses, null, '\t')}</p>
     </Buffer>
   )
 }

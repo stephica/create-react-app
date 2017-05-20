@@ -7,10 +7,8 @@ import { countryOptions, currencyOptions } from '../../base/config'
 
 const AccountPage = props => {
   const { dispatchLogin, dispatchLogout, error, submitHandler, user, handleSubmit } = props
-  // const user = props.data.userAuths
   const isUser = user && !!Object.keys(user).length
   const handler = ({ user }) => {
-    debugger
     submitHandler(user)
   }
   console.log('Account Rendered for :', user)

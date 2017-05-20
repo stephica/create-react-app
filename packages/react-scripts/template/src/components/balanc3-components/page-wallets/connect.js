@@ -1,26 +1,29 @@
 import { connect } from 'react-redux'
 import { getUserWallets } from './reducers'
 import { getUserToken } from '../account/reducers'
+import { showWalletModal } from '../wallet-modal/reducers'
 import WalletPage from './page-wallets'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 function mapStateToProps(state, props) {
   return {
-    wallets: getUserWallets(state)
+    _wallets: getUserWallets(state)
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    //
+    showWalletModal: () => dispatch(showWalletModal())
   }
 }
 
-const getWallets = gql`query ($token: String!) { userWallets(token: $token) { _id, name } }`
-// const getAddresses = gql`query ($token: String!) { userAddresses(token: $token) { _id, name, address, wallet } }`
+const getBoth = gql`query ($token: String!) {
+  userAddresses(token: $token) { _id, name, address, wallet } 
+  userWallets(token: $token) { _id, name }
+}`
 
-const WalletPageWithData = graphql(getWallets, {
+const WalletPageWithData = graphql(getBoth, {
   options: props => {
     return {
       variables: {
@@ -29,15 +32,5 @@ const WalletPageWithData = graphql(getWallets, {
     }
   }
 })(WalletPage)
-
-// const WalletPageWithAddressData = graphql(getAddresses, {
-//   options: props => {
-//     return {
-//       variables: {
-//         token: getUserToken()
-//       }
-//     }
-//   }
-// })(WalletPage)
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletPageWithData)
