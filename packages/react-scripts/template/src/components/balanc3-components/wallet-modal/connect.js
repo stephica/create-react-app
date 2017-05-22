@@ -31,10 +31,12 @@ const walletModalWithAddressMutation = graphql(addAddressMutation, {
             ...addressInfo
           }
         },
-        refetchQueries: [{
-          query: queryAddressesAndWallets,
-          variables: { token: getUserToken() }
-        }]
+        refetchQueries: [
+          {
+            query: queryAddressesAndWallets,
+            variables: { token: getUserToken() }
+          }
+        ]
       })
         .then(res => {
           console.log('response from mutation:', res)
@@ -58,12 +60,14 @@ const walletModalWithUpdateMutation = graphql(updateAddressMutation, {
             ...addressInfo
           }
         }
-      }).then(res => {
-        console.log('response from mutation:', res)
-          // dispatch(userReceived(res.data.updateUserAuth))
-      }).catch(err => {
-        console.error(err)
       })
+        .then(res => {
+          console.log('response from mutation:', res)
+          // dispatch(userReceived(res.data.updateUserAuth))
+        })
+        .catch(err => {
+          console.error(err)
+        })
     }
   })
 })
