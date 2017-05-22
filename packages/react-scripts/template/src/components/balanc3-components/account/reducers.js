@@ -15,7 +15,6 @@ export const logout = makeActionCreator($logout)
 const user = (state = {}, action) => {
   switch (action.type) {
     case $userReceived:
-      console.log('user recieved action called:', action.user)
       return {
         ...state,
         ...action.user

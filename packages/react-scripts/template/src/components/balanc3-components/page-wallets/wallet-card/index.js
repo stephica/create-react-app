@@ -3,11 +3,12 @@ import { string, array } from 'prop-types'
 import { Divider, Card } from 'semantic-ui-react'
 import { Fill, Row } from '../../../balanc3-components'
 import { getTotalBalance } from '../logic'
-import { showWalletModal } from '../../wallet-modal/reducers'
+import { showEditWalletModal } from '../../edit-wallet-modal/reducers'
 import { dispatch } from '../../../../utils'
 
 const Address = addressInfo => {
   const { name, address, balance, tokenStandard, tokenName } = addressInfo
+  const showEditAddressModal = () => dispatch(showEditWalletModal(addressInfo))
   return (
     <Row justifyContent="space-between">
       <span> {name} </span>
@@ -16,7 +17,7 @@ const Address = addressInfo => {
       <span> {tokenName} </span>
       <span> {balance} </span>
       <span>
-        <div onClick={() => dispatch(showWalletModal(addressInfo))}>edit</div>
+        <div onClick={showEditAddressModal}>edit</div>
       </span>
     </Row>
   )

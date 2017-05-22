@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import { graphql } from 'react-apollo'
-import { getModalState, getWalletInfo, hideWalletModal } from './reducers'
-import WalletModal from './wallet-modal'
+import { getModalState, getEditWalletInfo, hideEditWalletModal } from './reducers'
+import WalletModal from './edit-wallet-modal'
 import { getUserToken } from '../account/reducers'
-import { queryAddressesAndWallets, addAddressMutation, mutateAddress } from '../../../queries'
+import { queryAddressesAndWallets, mutateAddress } from '../../../queries'
 import { dispatch } from '../../../utils'
 
 function mapStateToProps(state, props) {
-  const walletInfo = getWalletInfo(state)
+  const walletInfo = getEditWalletInfo(state)
   return {
     active: getModalState(state),
     ...walletInfo
@@ -17,19 +17,23 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    hide: () => dispatch(hideWalletModal())
+    hide: () => dispatch(hideEditWalletModal())
   }
 }
 
-const walletModalWithAddressMutation = graphql(addAddressMutation, {
+const walletModalWithUpdateMutation = graphql(mutateAddress, {
   props: ({ mutate }) => ({
-    addAddress: newAddressInfo => {
+    updateAddress: updatedAddress => {
+      console.log('update mutation called', updatedAddress)
       mutate({
         variables: {
           data: {
             token: getUserToken(),
-            ...newAddressInfo
+            ...updatedAddress
           }
+        },
+        update: (a, b, c) => {
+          debugger
         },
         refetchQueries: [
           {
@@ -40,7 +44,7 @@ const walletModalWithAddressMutation = graphql(addAddressMutation, {
       })
         .then(res => {
           console.log('response from mutation:', res)
-          dispatch(hideWalletModal())
+          dispatch(hideEditWalletModal())
         })
         .catch(err => {
           console.error(err)
@@ -49,6 +53,6 @@ const walletModalWithAddressMutation = graphql(addAddressMutation, {
   })
 })
 
-export default compose(walletModalWithAddressMutation, connect(mapStateToProps, mapDispatchToProps))(WalletModal)
+export default compose(walletModalWithUpdateMutation, connect(mapStateToProps, mapDispatchToProps))(WalletModal)
 
 // export default connect(mapStateToProps, mapDispatchToProps)(WalletModal)

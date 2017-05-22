@@ -24,13 +24,13 @@ class WalletModal extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log('props:', props)
-    console.log('state:', this.state)
+    // console.log('props:', props)
+    // console.log('state:', this.state)
     this.setState({ ...props })
   }
 
   render() {
-    const { active, hide, addAddress, updateAddress } = this.props
+    const { active, hide, updateAddress } = this.props
     const { address, name } = this.state
 
     const handleclick = e => {
@@ -38,32 +38,20 @@ class WalletModal extends React.Component {
       if (this.props._id) {
         updateAddress({
           _id: this.props._id,
-          name: this.props.name
+          name: this.state.name
         })
-      } else {
       }
-      addAddress({
-        name: this.state.name,
-        address: this.state.address
-      })
     }
     return (
       <SmallModal open={active} onClose={hide}>
         <Card fluid>
           <Card.Content>
             <Card.Header>
-              Add New Address
+              {address}
             </Card.Header>
           </Card.Content>
           <Card.Content>
             <Form>
-              <ReduxFormInput
-                overheadLabel="New Address"
-                input={{
-                  value: address,
-                  onChange: e => this.setState({ address: e.target.value })
-                }}
-              />
               <ReduxFormInput
                 overheadLabel="Address Name"
                 input={{
