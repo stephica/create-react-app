@@ -40,7 +40,7 @@ fetch(graphqlUrl, {
     }
   })
 })
-    .then(res => res.json())
-    .then(res => {
-      // dispatch(userReceived(res.data.userAuths))
-    })
+  .then(res => res.json())
+  .then(res => {
+    // dispatch(userReceived(res.data.userAuths))
+  })

@@ -8,12 +8,16 @@ import { graphCall, mutateAddress } from '../../../../queries'
 const Address = addressInfo => {
   const { name, address, balance, tokenStandard, tokenName } = addressInfo
   // const showEditAddressModal = () => dispatch(showEditWalletModal(addressInfo))
-  const success = () => { console.log('success') }
-  const fail = () => { console.log('fail') }
+  const success = () => {
+    console.log('success')
+  }
+  const fail = () => {
+    console.log('fail')
+  }
   const updateData = {
-    'token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5MTMyYjkxMWFmMzBmMjE4YTZkY2IyZSIsImlhdCI6MTQ5NTQ2NzM2OSwiZXhwIjoxNDk2MDcyMTY5fQ.OeFsPhFm81rs_vuWj6VGt-QuM6XMFFjB9kBBerqaAsI',
-    '_id': '591da8dc72e5db323554e366',
-    'name': 'Nick100'
+    token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5MTMyYjkxMWFmMzBmMjE4YTZkY2IyZSIsImlhdCI6MTQ5NTQ2NzM2OSwiZXhwIjoxNDk2MDcyMTY5fQ.OeFsPhFm81rs_vuWj6VGt-QuM6XMFFjB9kBBerqaAsI',
+    _id: '591da8dc72e5db323554e366',
+    name: 'Nick100'
   }
   const showEditAddressModal = () => graphCall(mutateAddress, updateData, success, fail)
   return (
