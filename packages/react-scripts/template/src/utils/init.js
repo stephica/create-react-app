@@ -17,6 +17,7 @@ export default () => {
   })
     .then(res => res.json())
     .then(res => {
+      debugger
       dispatch(userReceived(res.data.userAuths))
     })
 

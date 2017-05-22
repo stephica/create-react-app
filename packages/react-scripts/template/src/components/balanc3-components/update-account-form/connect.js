@@ -22,14 +22,9 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state, props) {
   // console.log('redux user', getUser(state))
   // console.log('form user', selector(state, 'user'))
-  const reduxUser = getUser(state)
-  const formUser = selector(state, 'user')
+  const user = getUser(state)
   return {
-    user: {
-      ...reduxUser,
-      ...formUser
-    },
-    name: selector(state, 'name')
+    user: user
   }
 }
 
