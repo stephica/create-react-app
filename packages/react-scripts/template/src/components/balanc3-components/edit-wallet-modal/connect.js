@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
-import { graphql } from 'react-apollo'
+import { graphql, gql } from 'react-apollo'
 import { getModalState, getEditWalletInfo, hideEditWalletModal } from './reducers'
 import WalletModal from './edit-wallet-modal'
 import { getUserToken } from '../account/reducers'
@@ -21,7 +21,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const walletModalWithUpdateMutation = graphql(mutateAddress, {
+const walletModalWithUpdateMutation = graphql(gql`${mutateAddress}`, {
   props: ({ mutate }) => ({
     updateAddress: updatedAddress => {
       console.log('update mutation called', updatedAddress)
@@ -32,12 +32,9 @@ const walletModalWithUpdateMutation = graphql(mutateAddress, {
             ...updatedAddress
           }
         },
-        update: (a, b, c) => {
-          debugger
-        },
         refetchQueries: [
           {
-            query: queryAddressesAndWallets,
+            query: gql`${queryAddressesAndWallets}`,
             variables: { token: getUserToken() }
           }
         ]

@@ -3,7 +3,7 @@ import { getUserWallets } from './reducers'
 import { getUserToken } from '../account/reducers'
 import { showWalletModal } from '../wallet-modal/reducers'
 import WalletPage from './page-wallets'
-import { graphql } from 'react-apollo'
+import { graphql, gql } from 'react-apollo'
 import { queryAddressesAndWallets } from '../../../queries'
 function mapStateToProps(state, props) {
   return {
@@ -17,7 +17,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const WalletPageWithData = graphql(queryAddressesAndWallets, {
+const WalletPageWithData = graphql(gql`${queryAddressesAndWallets}`, {
   options: props => {
     return {
       variables: {
