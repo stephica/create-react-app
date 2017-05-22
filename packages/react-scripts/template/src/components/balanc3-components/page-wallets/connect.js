@@ -1,36 +1,34 @@
 import { connect } from 'react-redux'
-import { getUserWallets } from './reducers'
-import { getUserToken } from '../account/reducers'
-import { showWalletModal } from '../wallet-modal/reducers'
+import { getUserWallets, requestAddressesAndWallets, getUserAddresses } from './reducers'
+import { showWalletModal } from '../new-wallet-modal/reducers'
 import WalletPage from './page-wallets'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import { compose, lifecycle } from 'recompose'
+import { dispatch } from '../../../utils'
 
 function mapStateToProps(state, props) {
   return {
-    _wallets: getUserWallets(state)
+    _wallets: getUserWallets(state),
+    addresses: getUserAddresses(state)
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    showWalletModal: () => dispatch(showWalletModal())
+    showWalletModal: () => dispatch(showWalletModal()),
+    getUserWallets: () => dispatch(requestAddressesAndWallets())
   }
 }
-
-const getBoth = gql`query ($token: String!) {
-  userAddresses(token: $token) { _id, name, address, wallet } 
-  userWallets(token: $token) { _id, name }
-}`
-
-const WalletPageWithData = graphql(getBoth, {
-  options: props => {
-    return {
-      variables: {
-        token: getUserToken()
-      }
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  lifecycle({
+    componentWillUpdate(nextProps) {
+      // INITIAL UPDATE
+      dispatch(requestAddressesAndWallets())
+      console.log('Will Update:', nextProps)
+    },
+    componentWillMount() {
+      // WHEN COMING FROM ANOTHER PAGE
+      console.log('Will Mount:', this.props)
     }
-  }
-})(WalletPage)
-
-export default connect(mapStateToProps, mapDispatchToProps)(WalletPageWithData)
+  })
+)(WalletPage)

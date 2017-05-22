@@ -13,7 +13,7 @@ const SmallModal = styled(Modal)`
   }
 `
 
-class WalletModal extends React.Component {
+class NewWalletModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -30,7 +30,7 @@ class WalletModal extends React.Component {
   }
 
   render() {
-    const { active, hide, addAddress, updateAddress, wallet } = this.props
+    const { active, hide, addAddress, updateAddress } = this.props
     const { address, name } = this.state
 
     const handleclick = e => {
@@ -47,7 +47,6 @@ class WalletModal extends React.Component {
         address: this.state.address
       })
     }
-    console.log('address', address)
     return (
       <SmallModal open={active} onClose={hide}>
         <Card fluid>
@@ -81,4 +80,4 @@ class WalletModal extends React.Component {
   }
 }
 
-export default WalletModal
+export default NewWalletModal

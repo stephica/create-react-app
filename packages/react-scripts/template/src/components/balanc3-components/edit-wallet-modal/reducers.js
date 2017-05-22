@@ -1,9 +1,9 @@
 import { makeActionCreator } from '../../../utils'
 
-export const $showWalletModal = 'SHOW_WALLET_MODAL'
+export const $showWalletModal = 'SHOW_EDIT_WALLET_MODAL'
 export const showWalletModal = makeActionCreator($showWalletModal, 'wallet')
 
-export const $hideWalletModal = 'HIDE_WALLET_MODAL'
+export const $hideWalletModal = 'HIDE_EDIT_WALLET_MODAL'
 export const hideWalletModal = makeActionCreator($hideWalletModal)
 
 export default (state = {}, action) => {
@@ -24,5 +24,5 @@ export default (state = {}, action) => {
   }
 }
 
-export const getModalState = state => state.walletModal.activeState || null
-export const getWalletInfo = state => state.walletModal.walletInfo || null
+export const getModalState = state => state.editWalletModal.activeState || null
+export const getWalletInfo = state => state.editWalletModal.walletInfo || null

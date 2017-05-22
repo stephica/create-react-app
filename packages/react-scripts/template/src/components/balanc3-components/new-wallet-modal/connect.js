@@ -2,8 +2,9 @@ import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import { gql, graphql } from 'react-apollo'
 import { getModalState, getWalletInfo, hideWalletModal } from './reducers'
-import WalletModal from './wallet-modal'
+import NewWalletModal from './new-wallet-modal'
 import { getUserToken } from '../account/reducers'
+import { dispatch } from '../../../utils'
 
 function mapStateToProps(state, props) {
   const walletInfo = getWalletInfo(state)
@@ -21,7 +22,7 @@ function mapDispatchToProps(dispatch) {
 
 const addAddressMutation = gql`mutation ($data: addAddressInputType!) { addAddress(data: $data) { _id name address tokenContract tokenStandard } }`
 const walletModalWithAddressMutation = graphql(addAddressMutation, {
-  props: ({ mutate }) => ({
+  props: ({ ownProps, mutate }) => ({
     addAddress: addressInfo => {
       console.log('add mutation called', addressInfo)
       mutate({
@@ -30,10 +31,20 @@ const walletModalWithAddressMutation = graphql(addAddressMutation, {
             token: getUserToken(),
             ...addressInfo
           }
+        },
+        optimisticResponse: {
+          __typename: 'Mutation',
+          addAddress: {
+            __typename: 'userAddresses',
+            // Note that we can access the props of the container at `ownProps` if we
+            // need that information to compute the optimistic response
+            ...addressInfo
+          }
         }
       })
         .then(res => {
           console.log('response from mutation:', res)
+          dispatch(hideWalletModal())
           // dispatch(userReceived(res.data.updateUserAuth))
         })
         .catch(err => {
@@ -58,6 +69,7 @@ const walletModalWithUpdateMutation = graphql(updateAddressMutation, {
       })
         .then(res => {
           console.log('response from mutation:', res)
+          dispatch(hideWalletModal())
           // dispatch(userReceived(res.data.updateUserAuth))
         })
         .catch(err => {
@@ -67,6 +79,4 @@ const walletModalWithUpdateMutation = graphql(updateAddressMutation, {
   })
 })
 
-export default compose(walletModalWithAddressMutation, walletModalWithUpdateMutation, connect(mapStateToProps, mapDispatchToProps))(WalletModal)
-
-// export default connect(mapStateToProps, mapDispatchToProps)(WalletModal)
+export default compose(walletModalWithAddressMutation, walletModalWithUpdateMutation, connect(mapStateToProps, mapDispatchToProps))(NewWalletModal)

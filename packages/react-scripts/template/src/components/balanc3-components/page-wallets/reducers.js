@@ -3,8 +3,8 @@ import { makeActionCreator } from '../../../utils'
 export const $walletsReceived = 'WALLETS_RECEIVED'
 export const walletsReceived = makeActionCreator($walletsReceived, 'wallets')
 
-export const $requestWallets = 'REQUEST_WALLETS'
-export const requestWallets = makeActionCreator($requestWallets)
+export const $requestAddressesAndWallets = 'REQUEST_WALLETS'
+export const requestAddressesAndWallets = makeActionCreator($requestAddressesAndWallets)
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -53,3 +53,4 @@ const dummyWalletData = [
 ]
 export const getUserWallets = state => dummyWalletData
 // export const getUserWallets = state => state.wallets
+export const getUserAddresses = state => state.addresses
