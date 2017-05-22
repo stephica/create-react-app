@@ -4,10 +4,9 @@ import { logout, getUserToken, userReceived, getUser } from '../account/reducers
 import AccountForm from './update-account-form'
 import { gql, graphql } from 'react-apollo'
 import { showLoginModal } from '../account/modal/reducers'
-import { reduxForm, formValueSelector } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { dispatch } from '../../../utils'
 const form = 'update-account'
-const selector = formValueSelector(form)
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -20,8 +19,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state, props) {
-  // console.log('redux user', getUser(state))
-  // console.log('form user', selector(state, 'user'))
   const user = getUser(state)
   return {
     user: user

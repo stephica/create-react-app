@@ -1,9 +1,11 @@
 import { connect } from 'react-redux'
 import { compose } from 'recompose'
-import { gql, graphql } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import { getModalState, getWalletInfo, hideWalletModal } from './reducers'
 import WalletModal from './wallet-modal'
 import { getUserToken } from '../account/reducers'
+import { queryAddressesAndWallets, addAddressMutation, updateAddressMutation } from '../../../queries'
+import { dispatch } from '../../../utils'
 
 function mapStateToProps(state, props) {
   const walletInfo = getWalletInfo(state)
@@ -19,22 +21,24 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const addAddressMutation = gql`mutation ($data: addAddressInputType!) { addAddress(data: $data) { _id name address tokenContract tokenStandard } }`
 const walletModalWithAddressMutation = graphql(addAddressMutation, {
   props: ({ mutate }) => ({
     addAddress: addressInfo => {
-      console.log('add mutation called', addressInfo)
       mutate({
         variables: {
           data: {
             token: getUserToken(),
             ...addressInfo
           }
-        }
+        },
+        refetchQueries: [{
+          query: queryAddressesAndWallets,
+          variables: { token: getUserToken() }
+        }]
       })
         .then(res => {
           console.log('response from mutation:', res)
-          // dispatch(userReceived(res.data.updateUserAuth))
+          dispatch(hideWalletModal())
         })
         .catch(err => {
           console.error(err)
@@ -43,7 +47,6 @@ const walletModalWithAddressMutation = graphql(addAddressMutation, {
   })
 })
 
-const updateAddressMutation = gql`mutation ($data: updateWalletsInputType!) { updateWallet(data: $data) { _id name } }`
 const walletModalWithUpdateMutation = graphql(updateAddressMutation, {
   props: ({ mutate }) => ({
     updateAddress: addressInfo => {
@@ -55,14 +58,12 @@ const walletModalWithUpdateMutation = graphql(updateAddressMutation, {
             ...addressInfo
           }
         }
-      })
-        .then(res => {
-          console.log('response from mutation:', res)
+      }).then(res => {
+        console.log('response from mutation:', res)
           // dispatch(userReceived(res.data.updateUserAuth))
-        })
-        .catch(err => {
-          console.error(err)
-        })
+      }).catch(err => {
+        console.error(err)
+      })
     }
   })
 })

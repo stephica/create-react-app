@@ -6,7 +6,7 @@ import WalletCard from './wallet-card'
 import OverallCard from './overall-card'
 
 const WalletPage = props => {
-  console.log('props:', props)
+  console.log('wallet page props:', props)
   const addresses = props.data.userAddresses
   const wallets = props.data.userWallets
   const { showWalletModal } = props

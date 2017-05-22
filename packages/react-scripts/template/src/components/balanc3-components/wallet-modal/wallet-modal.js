@@ -30,7 +30,7 @@ class WalletModal extends React.Component {
   }
 
   render() {
-    const { active, hide, addAddress, updateAddress, wallet } = this.props
+    const { active, hide, addAddress, updateAddress } = this.props
     const { address, name } = this.state
 
     const handleclick = e => {

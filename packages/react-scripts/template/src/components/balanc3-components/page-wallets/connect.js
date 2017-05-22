@@ -4,8 +4,7 @@ import { getUserToken } from '../account/reducers'
 import { showWalletModal } from '../wallet-modal/reducers'
 import WalletPage from './page-wallets'
 import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
-
+import { queryAddressesAndWallets } from '../../../queries'
 function mapStateToProps(state, props) {
   return {
     _wallets: getUserWallets(state)
@@ -18,12 +17,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-const getBoth = gql`query ($token: String!) {
-  userAddresses(token: $token) { _id, name, address, wallet } 
-  userWallets(token: $token) { _id, name }
-}`
-
-const WalletPageWithData = graphql(getBoth, {
+const WalletPageWithData = graphql(queryAddressesAndWallets, {
   options: props => {
     return {
       variables: {
