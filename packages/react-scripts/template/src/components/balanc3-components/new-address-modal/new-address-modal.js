@@ -14,15 +14,16 @@ class NewAddressModal extends React.Component {
     }
   }
 
-  componentWilReceiveProps(props) {
-    console.log('address props:', props)
+  componentWillReceiveProps(props) {
+    console.log('setting state:', props)
     this.setState({ ...props })
   }
 
   render() {
     const { active, hide, addAddress, data } = this.props
-    const { address, name, wallet } = this.state
+    const { address, name, wallet = {} } = this.state
     const { userWallets = [] } = data
+    console.log('rendering wallet:', wallet)
     const walletsForSemantic = userWallets.map(wallet => {
       return {
         key: wallet._id,
@@ -35,7 +36,7 @@ class NewAddressModal extends React.Component {
       e.preventDefault()
       addAddress({
         name: this.state.name,
-        wallet: this.state.wallet,
+        wallet: this.state._id,
         address: this.state.address
       })
     }
@@ -67,7 +68,7 @@ class NewAddressModal extends React.Component {
                 overheadLabel="Choose Groop"
                 options={walletsForSemantic}
                 input={{
-                  value: wallet,
+                  value: wallet && wallet._id,
                   onChange: newValue => this.setState({ wallet: newValue })
                 }}
               />

@@ -6,7 +6,6 @@ import { Fill } from '../../../balanc3-components'
 // import { getTotalBalance } from '../logic'
 // import { graphCall, mutateAddress } from '../../../../queries'
 import { dispatch } from '../../../../utils'
-import { showEditWalletModal } from '../../edit-wallet-modal/reducers'
 import { showNewAddressModal } from '../../new-address-modal/reducers'
 import styled from 'styled-components'
 import AddressLine from './AddressLine'
@@ -18,14 +17,16 @@ const CardHeader = styled('span')`
 `
 
 const WalletCard = ({ wallet, addresses }) => {
-  const addNewWalletToGroup = () => dispatch(showNewAddressModal({ wallet: wallet._id }))
+  const addNewWalletToGroup = () => {
+    console.log('action:', wallet)
+    dispatch(showNewAddressModal(wallet))
+  }
   return (
     <Card fluid key={wallet._id}>
       <Card.Content>
         <Fill justifyContent="space-between">
           <CardHeader>{`${wallet.name} ( ${addresses.length} )`}</CardHeader>
           <span>Total: ${getTotalBalance(addresses)}</span>
-          {/* <span>{`Total: ${getTotalBalance()}`}</span> */}
         </Fill>
         <Divider />
         {addresses.map(addressInfo => <AddressLine {...addressInfo} key={addressInfo._id} />)}

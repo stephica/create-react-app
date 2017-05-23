@@ -10,6 +10,7 @@ const Ellipsis = styled('span')`
   width: 15%;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 `
 const AddressRow = styled(Row)`
   padding: 15px 0;
@@ -17,8 +18,10 @@ const AddressRow = styled(Row)`
 `
 
 const AddressLine = addressInfo => {
-  const { name, address, balance, tokenStandard, tokenName } = addressInfo
-  const showEditAddressModal = () => dispatch(showEditWalletModal(addressInfo))
+  const { name, address, balance, tokenStandard } = addressInfo
+  const showEditAddressModal = () => {
+    dispatch(showEditWalletModal(addressInfo))
+  }
   // const success = () => {
   //   console.log('success')
   // }
@@ -35,10 +38,10 @@ const AddressLine = addressInfo => {
     <AddressRow justifyContent="space-between">
       <Ellipsis style={{ width: '20%' }}> {name} </Ellipsis>
       <Ellipsis style={{ width: '50%' }}> {address} </Ellipsis>
-      <span style={{ width: '10%', textTransform: 'uppercase' }}> {`${balance || '0'} ${tokenStandard || 'eth'}`} </span>
+      <Ellipsis style={{ width: '10%', textTransform: 'uppercase' }}> {`${balance || '0'} ${tokenStandard || 'eth'}`} </Ellipsis>
       <span style={{ width: '10%', textAlign: 'right', color: 'lightGray' }}>
         <Icon name="edit" onClick={showEditAddressModal} style={{ cursor: 'pointer' }} />
-        {/*<Icon name="trash" style={{ cursor: 'pointer' }} /> */}
+        {/* <Icon name="trash" style={{ cursor: 'pointer' }} /> */}
       </span>
     </AddressRow>
   )

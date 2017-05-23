@@ -11,7 +11,7 @@ function mapStateToProps(state, props) {
   const walletInfo = getWalletInfo(state)
   return {
     active: getModalState(state),
-    ...walletInfo
+    wallet: walletInfo
   }
 }
 
