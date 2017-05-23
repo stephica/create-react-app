@@ -9,14 +9,15 @@ const WalletPage = props => {
   console.log('wallet page props:', props)
   const addresses = props.data.userAddresses
   const wallets = props.data.userWallets
-  const { showWalletModal } = props
+  const { showWalletModal, showNewWalletModal } = props
   // const { _wallets } = props
   // const groupNames = getGroupNames(wallets)
   const groups = getGroups(addresses, wallets)
   const hasGroups = groups && !!groups.length
   return (
     <Buffer>
-      <Button onClick={showWalletModal} style={{ marginBottom: '20px' }}>Add Wallet</Button>
+      <Button onClick={showWalletModal} style={{ marginBottom: '20px' }}>Add Address</Button>
+      <Button onClick={showNewWalletModal} style={{ marginBottom: '20px' }}>Create Group </Button>
       {hasGroups &&
         <span>
           <OverallCard wallets={wallets} groups={groups} />

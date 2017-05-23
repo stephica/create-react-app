@@ -28,7 +28,7 @@ const Address = addressInfo => {
       <span> {tokenName} </span>
       <span> {balance} </span>
       <span>
-        <div onClick={showEditAddressModal}>edit</div>
+        <div onClick={showEditAddressModal} style={{ cursor: 'pointer' }}>edit</div>
       </span>
     </Row>
   )
