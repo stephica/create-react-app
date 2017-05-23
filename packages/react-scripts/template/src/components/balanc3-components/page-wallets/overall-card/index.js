@@ -12,22 +12,21 @@ const GroupSummaryItem = styled('div')`
 const GroupSummary = ({ group }) => {
   return (
     <GroupSummaryItem>
-      <div> GroupName: {group[0].wallet} </div>
-      <div> {getTotalBalance(group)} </div>
-
+      <div> {group.wallet.name} </div>
+      <div> {`$${getTotalBalance(group.addresses)}`} </div>
     </GroupSummaryItem>
   )
 }
 
-const OverallCard = ({ groups, wallets }) => (
+const OverallCard = ({ groups, addresses }) => (
   <Card fluid>
     <Card.Content>
       <div style={{ textAlign: 'center' }}>
-        <Header size="large" style={{ margin: 0 }}>{getTotalBalance(wallets)}</Header>
+        <Header size="large" style={{ margin: 0 }}>{`$${getTotalBalance(addresses)}`}</Header>
         <p>Overall Balance</p>
       </div>
       <Divider />
-      {groups && groups.map(group => <GroupSummary key={group[0].wallet} group={group} />)}
+      {groups && groups.map(group => <GroupSummary key={group.wallet._id || 'catch all'} group={group} />)}
       <div />
     </Card.Content>
   </Card>

@@ -14,7 +14,7 @@ class NewAddressModal extends React.Component {
     }
   }
 
-  componentWillReceiveProps(props) {
+  componentWilReceiveProps(props) {
     console.log('address props:', props)
     this.setState({ ...props })
   }

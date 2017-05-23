@@ -1,33 +1,58 @@
 import React from 'react'
 import { Buffer } from '../../balanc3-components'
-import { Button } from 'semantic-ui-react'
-import { getGroups } from './logic'
+import { Button, Header } from 'semantic-ui-react'
+import { getGroups, _getGroups } from './logic'
 import WalletCard from './wallet-card'
 import OverallCard from './overall-card'
+import styled from 'styled-components'
 
-const WalletPage = props => {
-  console.log('wallet page props:', props)
-  const addresses = props.data.userAddresses
-  const wallets = props.data.userWallets
-  const { showNewAddressModal, showNewWalletModal } = props
-  // const { _wallets } = props
-  // const groupNames = getGroupNames(wallets)
+const Column = styled('div')`
+  &&&{
+    margin-bottom: 20px;
+    @media (min-width: ${({ theme }) => theme.medium}) {
+      width: 50%;
+      &:first-of-type{
+        // targets only the first Column
+        margin-right: 20px;
+      }
+    }
+  }
+ `
+const FlexManager = styled('div')`
+  @media (min-width: ${({ theme }) => theme.medium}) {
+    display: flex;
+  }
+`
+
+const HeaderRow = styled('div')`
+  display: flex;
+  justify-content: space-between;
+`
+
+const WalletPage = ({ showNewAddressModal, showNewWalletModal, data }) => {
+  const { userAddresses: addresses, userWallets: wallets } = data
   const groups = getGroups(addresses, wallets)
   const hasGroups = groups && !!groups.length
   return (
     <Buffer>
-      <Button onClick={showNewAddressModal} style={{ marginBottom: '20px' }}>Add Address</Button>
-      <Button onClick={showNewWalletModal} style={{ marginBottom: '20px' }}>Create Group </Button>
-      {hasGroups &&
+      <HeaderRow>
+        <Header as="h2">Accounts</Header>
         <span>
-          <OverallCard wallets={wallets} groups={groups} />
-          {wallets && wallets.map((wallet, i) => <WalletCard key={i} wallet={wallet} addresses={addresses} />)}
-          {addresses && <WalletCard key="catch-all" wallet={{ name: 'Ethereum Group' }} addresses={addresses} matchByToken="eth" />}
-        </span>}
-      {/* wallets:
-      <p style={{ whiteSpace: 'pre' }}>{JSON.stringify(wallets, null, '\t')}</p>
-      addresses:
-      <p style={{ whiteSpace: 'pre' }}>{JSON.stringify(addresses, null, '\t')}</p> */}
+          <Button onClick={showNewAddressModal} style={{ marginBottom: '20px' }}>Add Address</Button>
+          <Button onClick={showNewWalletModal} style={{ marginBottom: '20px' }}>Create Group </Button>
+        </span>
+      </HeaderRow>
+      {hasGroups &&
+        <FlexManager gutter="20px">
+          <Column>
+            <OverallCard groups={groups} addresses={addresses} />
+          </Column>
+          <Column>
+            {groups && groups.map((group, i) => <WalletCard key={i} wallet={group.wallet} addresses={group.addresses} />)}
+          </Column>
+        </FlexManager>}
+      {/* groups:
+      <p style={{ whiteSpace: 'pre' }}>{JSON.stringify(groups, null, '\t')}</p> */}
     </Buffer>
   )
 }

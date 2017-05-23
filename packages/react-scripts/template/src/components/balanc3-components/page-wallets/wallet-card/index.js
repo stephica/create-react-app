@@ -1,50 +1,21 @@
 import React from 'react'
+import { getTotalBalance } from '../logic'
 import { string, array, object } from 'prop-types'
 import { Divider, Card } from 'semantic-ui-react'
-import { Fill, Row } from '../../../balanc3-components'
+import { Fill } from '../../../balanc3-components'
 // import { getTotalBalance } from '../logic'
 // import { graphCall, mutateAddress } from '../../../../queries'
 import { dispatch } from '../../../../utils'
 import { showEditWalletModal } from '../../edit-wallet-modal/reducers'
 import { showNewAddressModal } from '../../new-address-modal/reducers'
+import styled from 'styled-components'
+import AddressLine from './AddressLine'
 
-const Address = addressInfo => {
-  const { name, address, balance, tokenStandard, tokenName } = addressInfo
-  const showEditAddressModal = () => dispatch(showEditWalletModal(addressInfo))
-  // const success = () => {
-  //   console.log('success')
-  // }
-  // const fail = () => {
-  //   console.log('fail')
-  // }
-  // const updateData = {
-  //   token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5MTMyYjkxMWFmMzBmMjE4YTZkY2IyZSIsImlhdCI6MTQ5NTQ2NzM2OSwiZXhwIjoxNDk2MDcyMTY5fQ.OeFsPhFm81rs_vuWj6VGt-QuM6XMFFjB9kBBerqaAsI',
-  //   _id: '591da8dc72e5db323554e366',
-  //   name: 'Nick100'
-  // }
-  // const showEditAddressModal = () => graphCall(mutateAddress, updateData, success, fail)
-  return (
-    <Row justifyContent="space-between">
-      <span> {name} </span>
-      <span> {address} </span>
-      <span> {tokenStandard} </span>
-      <span> {tokenName} </span>
-      <span> {balance} </span>
-      <span>
-        <div onClick={showEditAddressModal} style={{ cursor: 'pointer' }}>edit</div>
-      </span>
-    </Row>
-  )
-}
-Address.propTypes = {
-  name: string,
-  address: string,
-  balance: string,
-  tokenStandard: string,
-  tokenName: string
-}
-
-const isMatchingOrBothNull = (a, b) => a === b || (!a && !b)
+const CardHeader = styled('span')`
+  font-size: 15px;
+  font-weight: 500;
+  text-transform: uppercase;
+`
 
 const WalletCard = ({ wallet, addresses }) => {
   const addNewWalletToGroup = () => dispatch(showNewAddressModal({ wallet: wallet._id }))
@@ -52,11 +23,12 @@ const WalletCard = ({ wallet, addresses }) => {
     <Card fluid key={wallet._id}>
       <Card.Content>
         <Fill justifyContent="space-between">
-          <span>{`${wallet.name || 'Ethereum'}`}</span>
+          <CardHeader>{`${wallet.name} ( ${addresses.length} )`}</CardHeader>
+          <span>Total: ${getTotalBalance(addresses)}</span>
           {/* <span>{`Total: ${getTotalBalance()}`}</span> */}
         </Fill>
         <Divider />
-        {addresses.map(address => (isMatchingOrBothNull(address.wallet, wallet._id) ? <Address {...address} key={address._id} /> : null))}
+        {addresses.map(addressInfo => <AddressLine {...addressInfo} key={addressInfo._id} />)}
         <p onClick={addNewWalletToGroup} style={{ cursor: 'pointer', marginTop: '20px' }}> + Add Address</p>
       </Card.Content>
     </Card>
