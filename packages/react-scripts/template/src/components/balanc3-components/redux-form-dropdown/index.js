@@ -7,7 +7,7 @@ const Hint = styled(Label)` &&&{ background-color: ${props => props.theme.warnin
 const ErrorMessage = styled('p')` color: ${props => props.theme.red}; text-align: left; `
 
 const ReduxFormInput = props => {
-  const { overheadLabel, input, placeholder, label, hint, meta, options } = props
+  const { overheadLabel, input = {}, placeholder, label, hint, meta = {}, options } = props
   const _onchange = (param, data) => input.onChange(data.value)
 
   const { error, touched } = meta

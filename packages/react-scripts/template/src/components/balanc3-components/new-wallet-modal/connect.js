@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { compose } from 'recompose'
 import { graphql, gql } from 'react-apollo'
 import { getModalState, getWalletInfo, hideNewWalletModal } from './reducers'
-import WalletModal from './new-wallet-modal'
+import NewWalletModal from './new-wallet-modal'
 import { getUserToken } from '../account/reducers'
 import { queryAddressesAndWallets, addWallet } from '../../../queries'
 import { dispatch } from '../../../utils'
@@ -49,6 +49,6 @@ const walletModalWithAddressMutation = graphql(gql`${addWallet}`, {
   })
 })
 
-export default compose(walletModalWithAddressMutation, connect(mapStateToProps, mapDispatchToProps))(WalletModal)
+export default compose(walletModalWithAddressMutation, connect(mapStateToProps, mapDispatchToProps))(NewWalletModal)
 
 // export default connect(mapStateToProps, mapDispatchToProps)(WalletModal)

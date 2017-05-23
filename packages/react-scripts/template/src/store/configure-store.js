@@ -8,7 +8,7 @@ import peopleReducer from '../components/page-redux-example/peopleContainer/redu
 import getBySenderReducer from '../components/page-graphql/reducers'
 import accountReducer from '../components/balanc3-components/account/reducers'
 import sidebarReducer from '../components/balanc3-components/sidebar/reducers'
-import walletModalReducer from '../components/balanc3-components/wallet-modal/reducers'
+import newAddressReducer from '../components/balanc3-components/new-address-modal/reducers'
 import newWalletModalReducer from '../components/balanc3-components/new-wallet-modal/reducers'
 import editWalletModalReducer from '../components/balanc3-components/edit-wallet-modal/reducers'
 
@@ -26,7 +26,7 @@ const rootReducer = combineReducers({
   getBySender: getBySenderReducer,
   sidebar: sidebarReducer,
   account: accountReducer,
-  walletModal: walletModalReducer,
+  newAddressModal: newAddressReducer,
   newWalletModal: newWalletModalReducer,
   editWalletModal: editWalletModalReducer,
   apollo: client.reducer()

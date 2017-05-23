@@ -5,6 +5,7 @@ export const queryAddressesAndWallets = `query ($token: String!) {
   userWallets(token: $token) { _id, name }
 }`
 
+export const queryUserWallets = 'query ($token: String!) {userWallets(token: $token) { _id, name }}'
 export const addAddressMutation = 'mutation ($data: addAddressInputType!) { addAddress(data: $data) { _id name address tokenContract tokenStandard } }'
 export const mutateAddress = 'mutation ($data: updateWalletsInputType!) { updateWallet(data: $data) { _id name } }'
 export const addWallet = 'mutation ($data: addWalletsInputType!) { addWallet(data: $data) { _id name } }'

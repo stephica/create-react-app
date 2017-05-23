@@ -1,49 +1,41 @@
 import React from 'react'
 // import { bool, func } from 'prop-types'
-import { Modal, Card, Form, Button } from 'semantic-ui-react'
-import { ReduxFormInput } from '../../balanc3-components'
-import styled from 'styled-components'
+import { Card, Form, Button } from 'semantic-ui-react'
+import { ReduxFormInput, SmallModal, ReduxFormDropdown } from '../../balanc3-components'
 
-const SmallModal = styled(Modal)`
-  &&&{
-    @media (min-width: ${({ theme }) => theme.small}) {
-      width: 400px;
-      margin-left: -200px; // only left to not mess with Semantic UI
-    }
-  }
-`
-
-class WalletModal extends React.Component {
+class NewAddressModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       address: props.address || '',
       name: props.name || '',
+      wallet: props.wallet || '',
       tokenStandard: 'eth'
     }
   }
 
   componentWillReceiveProps(props) {
-    console.log('props:', props)
-    console.log('state:', this.state)
+    console.log('address props:', props)
     this.setState({ ...props })
   }
 
   render() {
-    const { active, hide, addAddress, updateAddress } = this.props
-    const { address, name } = this.state
+    const { active, hide, addAddress, data } = this.props
+    const { address, name, wallet } = this.state
+    const { userWallets = [] } = data
+    const walletsForSemantic = userWallets.map(wallet => {
+      return {
+        key: wallet._id,
+        text: wallet.name,
+        value: wallet._id
+      }
+    })
 
     const handleclick = e => {
       e.preventDefault()
-      if (this.props._id) {
-        updateAddress({
-          _id: this.props._id,
-          name: this.props.name
-        })
-      } else {
-      }
       addAddress({
         name: this.state.name,
+        wallet: this.state.wallet,
         address: this.state.address
       })
     }
@@ -71,6 +63,14 @@ class WalletModal extends React.Component {
                   onChange: e => this.setState({ name: e.target.value })
                 }}
               />
+              <ReduxFormDropdown
+                overheadLabel="Choose Groop"
+                options={walletsForSemantic}
+                input={{
+                  value: wallet,
+                  onChange: newValue => this.setState({ wallet: newValue })
+                }}
+              />
               <Button onClick={handleclick}>Save</Button>
             </Form>
           </Card.Content>
@@ -80,4 +80,4 @@ class WalletModal extends React.Component {
   }
 }
 
-export default WalletModal
+export default NewAddressModal

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { getUserWallets } from './reducers'
 import { getUserToken } from '../account/reducers'
-import { showWalletModal } from '../wallet-modal/reducers'
+import { showNewAddressModal } from '../new-address-modal/reducers'
 import { showNewWalletModal } from '../new-wallet-modal/reducers'
 import WalletPage from './page-wallets'
 import { graphql, gql } from 'react-apollo'
@@ -14,7 +14,7 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    showWalletModal: () => dispatch(showWalletModal()),
+    showNewAddressModal: () => dispatch(showNewAddressModal()),
     showNewWalletModal: () => dispatch(showNewWalletModal())
   }
 }

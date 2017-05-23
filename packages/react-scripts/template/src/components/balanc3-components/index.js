@@ -1,6 +1,6 @@
 export { default as Sidebar } from './sidebar'
 export { default as LoginModal } from './account/modal'
-export { default as WalletModal } from './wallet-modal'
+export { default as NewAddressModal } from './new-address-modal'
 export { default as NewWalletModal } from './new-wallet-modal'
 export { default as EditWalletModal } from './edit-wallet-modal'
 export { default as Avatar } from './account/avatar'

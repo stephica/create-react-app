@@ -1,19 +1,9 @@
 import React from 'react'
 // import { bool, func } from 'prop-types'
-import { Modal, Card, Form, Button } from 'semantic-ui-react'
-import { ReduxFormInput } from '../../balanc3-components'
-import styled from 'styled-components'
+import { Card, Form, Button } from 'semantic-ui-react'
+import { ReduxFormInput, SmallModal } from '../../balanc3-components'
 
-const SmallModal = styled(Modal)`
-  &&&{
-    @media (min-width: ${({ theme }) => theme.small}) {
-      width: 400px;
-      margin-left: -200px; // only left to not mess with Semantic UI
-    }
-  }
-`
-
-class WalletModal extends React.Component {
+class EditWalletModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -35,12 +25,10 @@ class WalletModal extends React.Component {
 
     const handleclick = e => {
       e.preventDefault()
-      if (this.props._id) {
-        updateAddress({
-          _id: this.props._id,
-          name: this.state.name
-        })
-      }
+      updateAddress({
+        _id: this.props._id,
+        name: this.state.name
+      })
     }
     return (
       <SmallModal open={active} onClose={hide}>
@@ -68,4 +56,4 @@ class WalletModal extends React.Component {
   }
 }
 
-export default WalletModal
+export default EditWalletModal

@@ -12,7 +12,7 @@ const BottomLink = styled('p')`
 `
 
 const LoginModal = ({ activeItem, signup, hide, login, forgot }) => (
-  <SmallModal open={!!activeItem} onClose={hide}>
+  <SmallModal open={!!activeItem} onClose={hide} style={{ padding: 40, textAlign: 'center' }}>
     <Modal.Content>
       <Logo dark large style={{ padding: '30px', display: 'block' }} />
       {/* <h2 style={{ padding: '30px' }}>Balanc3</h2> */}
