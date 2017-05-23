@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Modal } from 'semantic-ui-react'
 
-const SmallModal = styled(Modal)`
+export default styled(Modal)`
   &&&{
     text-align: center;
     @media (min-width: ${({ theme }) => theme.small}) {

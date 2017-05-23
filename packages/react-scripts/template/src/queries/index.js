@@ -1,7 +1,7 @@
 import { graphqlUrl } from '../components/base/config'
 
 export const queryAddressesAndWallets = `query ($token: String!) {
-  userAddresses(token: $token) { _id, name, address, wallet } 
+  userAddresses(token: $token) { _id, name, address, wallet, tokenContract, tokenStandard } 
   userWallets(token: $token) { _id, name }
 }`
 

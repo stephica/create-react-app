@@ -12,7 +12,7 @@ export const getGroupNames = (addresses = []) => {
   }, [])
 }
 
-export const getGroups = (addresses, wallets) => {
+export const getGroups = (addresses = [], wallets = []) => {
   const _GroupedAddresses = getGroupNames(addresses)
   const GroupedAddresses = _GroupedAddresses.map(name => addresses.filter(adr => adr.wallet === name || (!adr.wallet && !name)))
   return GroupedAddresses

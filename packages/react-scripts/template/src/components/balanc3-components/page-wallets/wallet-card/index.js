@@ -1,9 +1,11 @@
 import React from 'react'
-import { string, array } from 'prop-types'
+import { string, array, object } from 'prop-types'
 import { Divider, Card } from 'semantic-ui-react'
 import { Fill, Row } from '../../../balanc3-components'
-import { getTotalBalance } from '../logic'
+// import { getTotalBalance } from '../logic'
 import { graphCall, mutateAddress } from '../../../../queries'
+import { dispatch } from '../../../../utils'
+import { showWalletModal } from '../../wallet-modal/reducers'
 
 const Address = addressInfo => {
   const { name, address, balance, tokenStandard, tokenName } = addressInfo
@@ -41,21 +43,28 @@ Address.propTypes = {
   tokenName: string
 }
 
-const WalletCard = ({ group, address }) => (
-  <Card fluid key={group[0].wallet}>
-    <Card.Content>
-      <Fill justifyContent="space-between">
-        <span>{`Group Name: ${group[0].wallet || 'General'}`}</span>
-        <span>{`Total: ${getTotalBalance(group)}`}</span>
-      </Fill>
-      <Divider />
-      {group.map(address => <Address {...address} key={address._id} />)}
-    </Card.Content>
-  </Card>
-)
+const isMatchingOrBothNull = (a, b) => a === b || (!a && !b)
+
+const WalletCard = ({ wallet, addresses }) => {
+  const addNewWalletToGroup = () => dispatch(showWalletModal({ wallet: wallet._id }))
+  return (
+    <Card fluid key={wallet._id}>
+      <Card.Content>
+        <Fill justifyContent="space-between">
+          <span>{`${wallet.name || 'Ethereum'}`}</span>
+          {/* <span>{`Total: ${getTotalBalance()}`}</span> */}
+        </Fill>
+        <Divider />
+        {addresses.map(address => (isMatchingOrBothNull(address.wallet, wallet._id) ? <Address {...address} key={address._id} /> : null))}
+        <p onClick={addNewWalletToGroup}> + Add Address</p>
+      </Card.Content>
+    </Card>
+  )
+}
 
 WalletCard.propTypes = {
-  group: array,
+  addresses: array,
+  wallet: object,
   address: string
 }
 

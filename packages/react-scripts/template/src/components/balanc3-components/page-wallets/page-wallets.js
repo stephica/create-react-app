@@ -21,12 +21,13 @@ const WalletPage = props => {
       {hasGroups &&
         <span>
           <OverallCard wallets={wallets} groups={groups} />
-          {groups && groups.map((group, i) => <WalletCard key={i} group={group} addresses={addresses} />)}
+          {wallets && wallets.map((wallet, i) => <WalletCard key={i} wallet={wallet} addresses={addresses} />)}
+          {addresses && <WalletCard key="catch-all" wallet={{ name: 'Ethereum Group' }} addresses={addresses} matchByToken="eth" />}
         </span>}
-      wallets:
+      {/* wallets:
       <p style={{ whiteSpace: 'pre' }}>{JSON.stringify(wallets, null, '\t')}</p>
       addresses:
-      <p style={{ whiteSpace: 'pre' }}>{JSON.stringify(addresses, null, '\t')}</p>
+      <p style={{ whiteSpace: 'pre' }}>{JSON.stringify(addresses, null, '\t')}</p> */}
     </Buffer>
   )
 }
