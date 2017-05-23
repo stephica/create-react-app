@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import Home from './components/page-home'
 import Header from './components/balanc3-components/header'
 import _AccountPage from './components/page-account'
-import { LoginModal, Sidebar, TermsPage, WalletModal, EditWalletModal } from './components/balanc3-components'
+import { LoginModal, Sidebar, TermsPage, WalletModal, EditWalletModal, NewWalletModal } from './components/balanc3-components'
 
 class App extends Component {
   render() {
@@ -13,6 +13,7 @@ class App extends Component {
       <div>
         <LoginModal />
         <WalletModal />
+        <NewWalletModal />
         <EditWalletModal />
         <Sidebar />
         <Header />
