@@ -1,7 +1,7 @@
 import React from 'react'
-// import { bool, func } from 'prop-types'
+import { bool, func } from 'prop-types'
 import { Card, Form, Button } from 'semantic-ui-react'
-import { ReduxFormInput, SmallModal } from '../../balanc3-components'
+import { ReduxFormInput, SmallModal, Ellipsis } from '../../balanc3-components'
 
 class EditWalletModal extends React.Component {
   constructor(props) {
@@ -35,7 +35,8 @@ class EditWalletModal extends React.Component {
         <Card fluid>
           <Card.Content>
             <Card.Header>
-              {address}
+              <span>Edit Address: </span>
+              <Ellipsis style={{ fontSize: '12px', fontWeight: '100' }}>{address}</Ellipsis>
             </Card.Header>
           </Card.Content>
           <Card.Content>
@@ -47,13 +48,19 @@ class EditWalletModal extends React.Component {
                   onChange: e => this.setState({ name: e.target.value })
                 }}
               />
-              <Button onClick={handleclick}>Save</Button>
+              <Button onClick={handleclick} color="green">Save</Button>
             </Form>
           </Card.Content>
         </Card>
       </SmallModal>
     )
   }
+}
+
+EditWalletModal.propTypes = {
+  active: bool,
+  hide: func,
+  updateAddress: func
 }
 
 export default EditWalletModal

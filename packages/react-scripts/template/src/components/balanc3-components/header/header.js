@@ -26,6 +26,10 @@ const HeaderRow = styled(HeaderSpace)`
 const HeaderLink = styled(Link)`
   color: ${props => props.theme.white};
   margin-right: 20px;
+  &:hover{
+    text-decoration: none;
+    color: ${props => props.theme.white};
+  }
 `
 
 const Header = props => {
@@ -39,12 +43,13 @@ const Header = props => {
           <HeaderRow alignItems="center">
             <div>
               <HeaderLink to="/" style={{ margin: '0 60px 0 0' }}><Logo light /></HeaderLink>
-              {isSmall && <HeaderLink to="/redux">Redux</HeaderLink>}
-              {isSmall && <HeaderLink to="/graphql">GraphQl</HeaderLink>}
+              {isSmall && <HeaderLink to="/account">Account</HeaderLink>}
+              {/* {isSmall && <HeaderLink to="/redux">Redux</HeaderLink>} */}
+              {isSmall && <HeaderLink to="/transactions">Transactions</HeaderLink>}
             </div>
             <div>
               <Media minWidth={screenSizes.small}>
-                {isUser && <Link to="/account"> <Avatar style={{ margin: 0 }} user={user} /></Link>}
+                {isUser && <HeaderLink to="/account"> <Avatar style={{ margin: 0 }} user={user} /></HeaderLink>}
                 {!isUser && <span style={{ color: 'white', cursor: 'pointer' }} onClick={showLoginModal}> Login </span>}
               </Media>
               <Media maxWidth={screenSizes.small} onClick={sidebarOpen ? hideSidebar : showSidebar} style={{ cursor: 'pointer' }}>
