@@ -1,44 +1,43 @@
-import React from 'react';
-import { bool, func, string, object } from 'prop-types';
-import { Card, Form, Button } from 'semantic-ui-react';
-import { ReduxFormInput, SmallModal, ReduxFormDropdown } from '../../balanc3-components';
+import React from 'react'
+import { bool, func, string, object } from 'prop-types'
+import { Card, Form, Button } from 'semantic-ui-react'
+import { ReduxFormInput, SmallModal, ReduxFormDropdown } from '../../balanc3-components'
 
 class NewAddressModal extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      address: props.address || '',
-      name: props.name || '',
-      wallet: props.wallet || '',
+      address: '',
+      name: '',
+      wallet: '',
       tokenStandard: 'eth'
-    };
+    }
   }
 
   componentWillReceiveProps(props) {
-    this.setState({ walletId: props.wallet && props.wallet._id });
+    this.setState({ walletId: props.wallet && props.wallet._id })
   }
 
   render() {
-    const { active, hide, addAddress, data } = this.props;
-    const { address, name } = this.state;
-    const { userWallets = [] } = data;
+    const { active, hide, addAddress, data } = this.props
+    const { address, name } = this.state
+    const { userWallets = [] } = data
     const walletsForSemantic = userWallets.map(wallet => {
       return {
         key: wallet._id,
         text: wallet.name,
         value: wallet._id
-      };
-    });
+      }
+    })
 
     const handleclick = e => {
-      e.preventDefault();
-      debugger;
+      e.preventDefault()
       addAddress({
         name: this.state.name,
         wallet: this.state.walletId,
         address: this.state.address
-      });
-    };
+      })
+    }
     return (
       <SmallModal open={active} onClose={hide}>
         <Card fluid>
@@ -67,7 +66,7 @@ class NewAddressModal extends React.Component {
                 overheadLabel="Choose Groop"
                 options={walletsForSemantic}
                 input={{
-                  value: this.state.walletId,
+                  value: this.state.walletId || '',
                   onChange: newValue => this.setState({ walletId: newValue })
                 }}
               />
@@ -76,7 +75,7 @@ class NewAddressModal extends React.Component {
           </Card.Content>
         </Card>
       </SmallModal>
-    );
+    )
   }
 }
 
@@ -88,6 +87,6 @@ NewAddressModal.propTypes = {
   wallet: object,
   name: string,
   data: object
-};
+}
 
-export default NewAddressModal;
+export default NewAddressModal

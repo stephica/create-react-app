@@ -1,35 +1,35 @@
-import React from 'react';
-import { bool, func } from 'prop-types';
-import { Card, Form, Button } from 'semantic-ui-react';
-import { ReduxFormInput, SmallModal, Ellipsis } from '../../balanc3-components';
+import React from 'react'
+import { bool, func, string } from 'prop-types'
+import { Card, Form, Button } from 'semantic-ui-react'
+import { ReduxFormInput, SmallModal, Ellipsis } from '../../balanc3-components'
 
 class EditWalletModal extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       address: props.address || '',
       name: props.name || '',
-      tokenStandard: 'eth',
-    };
+      tokenStandard: 'eth'
+    }
   }
 
   componentWillReceiveProps(props) {
     // console.log('props:', props)
     // console.log('state:', this.state)
-    this.setState({ ...props });
+    this.setState({ ...props })
   }
 
   render() {
-    const { active, hide, updateAddress } = this.props;
-    const { address, name } = this.state;
+    const { active, hide, updateAddress } = this.props
+    const { address, name } = this.state
 
     const handleclick = e => {
-      e.preventDefault();
+      e.preventDefault()
       updateAddress({
         _id: this.props._id,
-        name: this.state.name,
-      });
-    };
+        name: this.state.name
+      })
+    }
     return (
       <SmallModal open={active} onClose={hide}>
         <Card fluid>
@@ -47,7 +47,7 @@ class EditWalletModal extends React.Component {
                 overheadLabel="Address Name"
                 input={{
                   value: name,
-                  onChange: e => this.setState({ name: e.target.value }),
+                  onChange: e => this.setState({ name: e.target.value })
                 }}
               />
               <Button onClick={handleclick} color="green">Save</Button>
@@ -55,14 +55,16 @@ class EditWalletModal extends React.Component {
           </Card.Content>
         </Card>
       </SmallModal>
-    );
+    )
   }
 }
 
 EditWalletModal.propTypes = {
   active: bool,
   hide: func,
-  updateAddress: func,
-};
+  address: string,
+  name: string,
+  updateAddress: func
+}
 
-export default EditWalletModal;
+export default EditWalletModal

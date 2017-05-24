@@ -1,31 +1,30 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 // import { bool, func } from 'prop-types'
-import { Card, Form, Button } from 'semantic-ui-react';
-import { ReduxFormInput, SmallModal } from '../../balanc3-components';
+import { Card, Form, Button } from 'semantic-ui-react'
+import { ReduxFormInput, SmallModal } from '../../balanc3-components'
 
 class NewGroupModal extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       address: props.address || '',
       name: props.name || '',
       tokenStandard: 'eth'
-    };
+    }
   }
 
   componentWillReceiveProps(props) {
-    debugger;
-    this.setState({ ...props });
+    this.setState({ ...props })
   }
 
   render() {
-    const { active, hide, addGroup } = this.props;
-    const { name } = this.state;
+    const { active, hide, addGroup } = this.props
+    const { name } = this.state
 
     const handleclick = e => {
-      e.preventDefault();
-      addGroup(this.state.name);
-    };
+      e.preventDefault()
+      addGroup(this.state.name)
+    }
     return (
       <SmallModal open={active} onClose={hide}>
         <Card fluid>
@@ -48,8 +47,8 @@ class NewGroupModal extends Component {
           </Card.Content>
         </Card>
       </SmallModal>
-    );
+    )
   }
 }
 
-export default NewGroupModal;
+export default NewGroupModal
