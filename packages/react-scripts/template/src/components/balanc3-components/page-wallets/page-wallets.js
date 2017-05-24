@@ -55,7 +55,7 @@ const WalletPage = ({ showNewAddressModal, showNewWalletModal, data }) => {
             {groups && groups.map((group, i) => <WalletCard key={i} wallet={group.wallet} addresses={group.addresses} />)}
           </Column>
         </FlexManager>}
-      {/*groups:
+      {/* groups:
       <p style={{ whiteSpace: 'pre' }}>{JSON.stringify(groups, null, '\t')}</p> */}
     </Buffer>
   );
