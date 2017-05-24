@@ -24,7 +24,6 @@ function mapDispatchToProps(dispatch) {
 const walletModalWithAddressMutation = graphql(gql`${addWallet}`, {
   props: ({ mutate }) => ({
     addGroup: name => {
-      debugger
       mutate({
         variables: {
           data: {

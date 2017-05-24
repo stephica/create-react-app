@@ -15,7 +15,7 @@ const ForgotPasswordForm = props => {
             We will send you a reset link to easily create a new password :)
           </p>
           <Form warning onSubmit={handleSubmit(postForgotPassword)} error={!!error}>
-            <Field name="email" placeholder="Email" component={ReduxFormInput} />
+            <Field name="email" placeholder="Email" component={ReduxFormInput} type="password" />
             <Message error content={error} />
             <Button type="submit" disabled={invalid} color="green">Reset Password</Button>
           </Form>

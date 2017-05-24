@@ -21,7 +21,6 @@ const login = createLogic({
       .then(res => res.json())
       .then(res => {
         if (!res.err) {
-          debugger
           dispatch(userReceived(res))
           const isModal = getModalState(getState())
           if (isModal) dispatch(hideLoginModal())

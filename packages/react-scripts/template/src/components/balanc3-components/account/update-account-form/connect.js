@@ -1,11 +1,12 @@
 import { connect } from 'react-redux'
 import { compose, lifecycle } from 'recompose'
-import { logout, getUserToken, userReceived, getUser } from '../account/reducers'
+import { logout, getUserToken, userReceived, getUser } from '../reducers'
 import AccountForm from './update-account-form'
 import { gql, graphql } from 'react-apollo'
-import { showLoginModal } from '../account/modal/reducers'
+import { showLoginModal } from '../modal/reducers'
 import { reduxForm } from 'redux-form'
-import { dispatch } from '../../../utils'
+import { dispatch } from '../../../../utils'
+import { updateAccountFormState, getUpdateAccountFormState } from './reducers'
 const form = 'update-account'
 
 function mapDispatchToProps(dispatch) {
@@ -21,7 +22,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state, props) {
   const user = getUser(state)
   return {
-    user: user
+    user: user,
+    formSuccess: getUpdateAccountFormState(state) === 'success'
   }
 }
 
@@ -30,7 +32,7 @@ const userMutation = gql`mutation ($data: updateUserAuthsInputType!) { updateUse
 const AccountFormWithMutation = graphql(userMutation, {
   props: ({ mutate }) => ({
     submitHandler: user => {
-      console.log('mutation called', user)
+      // console.log('mutation called', user)
       try {
         delete user.token
         delete user.__typename
@@ -50,8 +52,9 @@ const AccountFormWithMutation = graphql(userMutation, {
         }
       })
         .then(res => {
-          console.log('response from mutation:', res)
           dispatch(userReceived(res.data.updateUserAuth))
+          dispatch(updateAccountFormState('success'))
+          setTimeout(() => dispatch(updateAccountFormState('default')), 2000)
         })
         .catch(err => {
           console.error(err)
@@ -67,15 +70,14 @@ export default compose(
   lifecycle({
     componentWillUpdate(nextProps) {
       // INITIAL UPDATE
-      console.log('Will Update:', nextProps.user)
+      // console.log('Will Update:', nextProps.user)
       if (nextProps.user.email && !nextProps.initialized) {
-        console.log('Initializing', nextProps.user)
         nextProps.initialize({ user: nextProps.user })
       }
     },
     componentWillMount() {
       // WHEN COMING FROM ANOTHER PAGE
-      console.log('Will Mount:', this.props.user)
+      // console.log('Will Mount:', this.props.user)
       if (this.props.user.email && !this.props.initialized) {
         this.props.initialize({ user: this.props.user })
       }

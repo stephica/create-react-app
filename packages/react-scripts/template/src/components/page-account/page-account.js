@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
-import { AccountPage as AccountTab, WalletPage as WalletTab } from '../balanc3-components'
+import { UpdateAccountForm as AccountTab, WalletPage as WalletTab } from '../balanc3-components'
 
 export default class AccountPage extends Component {
-  state = { activeItem: 'Wallets' }
+  state = { activeItem: 'Info' }
   handleItemClick(e, { label }) {
     this.setState({ activeItem: label })
   }

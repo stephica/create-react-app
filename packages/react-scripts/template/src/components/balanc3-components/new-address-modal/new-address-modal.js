@@ -1,5 +1,5 @@
 import React from 'react'
-// import { bool, func } from 'prop-types'
+import { bool, func, string, object } from 'prop-types'
 import { Card, Form, Button } from 'semantic-ui-react'
 import { ReduxFormInput, SmallModal, ReduxFormDropdown } from '../../balanc3-components'
 
@@ -15,7 +15,6 @@ class NewAddressModal extends React.Component {
   }
 
   componentWillReceiveProps(props) {
-    console.log('setting state:', props)
     this.setState({ ...props })
   }
 
@@ -23,7 +22,6 @@ class NewAddressModal extends React.Component {
     const { active, hide, addAddress, data } = this.props
     const { address, name, wallet = {} } = this.state
     const { userWallets = [] } = data
-    console.log('rendering wallet:', wallet)
     const walletsForSemantic = userWallets.map(wallet => {
       return {
         key: wallet._id,
@@ -79,6 +77,16 @@ class NewAddressModal extends React.Component {
       </SmallModal>
     )
   }
+}
+
+NewAddressModal.propTypes = {
+  active: bool,
+  hide: func,
+  addAddress: func,
+  address: string,
+  wallet: object,
+  name: string,
+  data: object
 }
 
 export default NewAddressModal

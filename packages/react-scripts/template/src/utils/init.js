@@ -5,20 +5,23 @@ import { graphqlUrl } from '../components/base/config'
 
 export default () => {
   // CHECKS IF USER IS AUTHENTICATED
-  fetch(graphqlUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      query: 'query ($token: String) { userAuths(token: $token) {_id, name, email, createdDate, country, fiatCurrency } }',
-      variables: {
-        token: getUserToken() || ''
-      }
+  const userToken = getUserToken() || ''
+  if (userToken) {
+    fetch(graphqlUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        query: 'query ($token: String) { userAuths(token: $token) {_id, name, email, createdDate, country, fiatCurrency } }',
+        variables: {
+          token: userToken
+        }
+      })
     })
-  })
-    .then(res => res.json())
-    .then(res => {
-      dispatch(userReceived(res.data.userAuths))
-    })
+      .then(res => res.json())
+      .then(res => {
+        dispatch(userReceived(res.data.userAuths))
+      })
+  }
 
   // CHECKS IF WE SHOULD DISPATCH SPECIAL NON-ROUTE ACTION
   const path = window.location.pathname

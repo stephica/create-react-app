@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import loginForm from './login-form/reducers'
 import signupForm, { getSignupFormError as signupError } from './signup-form/reducers'
+import updateAccountForm from './update-account-form/reducers'
 import modal, { showLoginModal as _showLoginModal } from './modal/reducers'
 import forgot from './forgot-password-form/reducers'
 import reset from './reset-password-form/reducers'
@@ -29,6 +30,7 @@ const user = (state = {}, action) => {
 export default combineReducers({
   loginForm,
   signupForm,
+  updateAccountForm,
   user,
   forgot,
   reset,

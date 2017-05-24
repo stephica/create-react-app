@@ -1,5 +1,5 @@
 import React from 'react'
-import { string, object, bool, array } from 'prop-types'
+import { string, object, bool, array, func } from 'prop-types'
 import { Form, Label, Dropdown } from 'semantic-ui-react'
 import styled from 'styled-components'
 
@@ -7,8 +7,13 @@ const Hint = styled(Label)` &&&{ background-color: ${props => props.theme.warnin
 const ErrorMessage = styled('p')` color: ${props => props.theme.red}; text-align: left; `
 
 const ReduxFormInput = props => {
-  const { overheadLabel, input = {}, placeholder, label, hint, meta = {}, options } = props
-  const _onchange = (param, data) => input.onChange(data.value)
+  const { overheadLabel, input = {}, placeholder, label, hint, meta = {}, options, onChange } = props
+  const _onchange = (param, data) => {
+    input.onChange(data.value)
+    if (onChange) {
+      onChange(data.value)
+    }
+  }
 
   const { error, touched } = meta
   const showHint = hint && error
@@ -19,7 +24,6 @@ const ReduxFormInput = props => {
       <Dropdown
         style={{ fontWeight: 'normal' }}
         fluid
-        search
         selection
         {...input}
         options={options}
@@ -43,7 +47,8 @@ ReduxFormInput.propTypes = {
   selection: bool,
   options: array,
   input: object,
-  meta: object
+  meta: object,
+  onChange: func
 }
 
 export default ReduxFormInput

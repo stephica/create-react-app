@@ -17,10 +17,10 @@ const setPassword = e => (password = e.target.value)
 const LoginForm = ({ error, loading }) => (
   <Form error={!!error} loading={loading} style={{ textAlign: 'center' }}>
     <Form.Field>
-      <input placeholder="Email" onChange={setEmail} />
+      <input placeholder="Email" type="email" onChange={setEmail} />
     </Form.Field>
     <Form.Field>
-      <input placeholder="Password" onChange={setPassword} />
+      <input placeholder="Password" type="password" onChange={setPassword} />
     </Form.Field>
     <Button fluid color="green" onClick={clickhandler}>Login</Button>
     <Message error content={error} />
