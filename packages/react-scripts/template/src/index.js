@@ -1,26 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
-import { configureStore, client } from './store/configure-store'
-import theme from './components/base/theme'
-import { ThemeProvider } from 'styled-components'
-import { BrowserRouter as Router, withRouter } from 'react-router-dom'
-import { ApolloProvider } from 'react-apollo'
-export const store = configureStore()
-import 'whatwg-fetch'
-import { init } from './utils'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import registerServiceWorker from './registerServiceWorker';
+import './index.css';
 
-const AppWithRouterInfo = withRouter(App)
-
-init()
-
-ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <ApolloProvider client={client} store={store}>
-      <Router>
-        <AppWithRouterInfo />
-      </Router>
-    </ApolloProvider>
-  </ThemeProvider>,
-  document.getElementById('root')
-)
+ReactDOM.render(<App />, document.getElementById('root'));
+registerServiceWorker();

@@ -30,7 +30,10 @@ class BuiltEmitter extends Component {
   }
 
   render() {
-    const { props: { feature }, handleReady } = this;
+    const {
+      props: { feature },
+      handleReady,
+    } = this;
     return (
       <div>
         {createElement(feature, {
@@ -51,7 +54,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const feature = location.hash.slice(1);
+    const feature = window.location.hash.slice(1);
     switch (feature) {
       case 'array-destructuring':
         import(
