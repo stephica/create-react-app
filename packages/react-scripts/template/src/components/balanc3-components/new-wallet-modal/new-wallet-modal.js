@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 // import { bool, func } from 'prop-types'
 import { Card, Form, Button } from 'semantic-ui-react';
 import { ReduxFormInput, SmallModal } from '../../balanc3-components';
 
-class NewGroupModal extends React.Component {
+class NewGroupModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       address: props.address || '',
       name: props.name || '',
-      tokenStandard: 'eth',
+      tokenStandard: 'eth'
     };
   }
 
   componentWillReceiveProps(props) {
+    debugger;
     this.setState({ ...props });
   }
 
@@ -39,7 +40,7 @@ class NewGroupModal extends React.Component {
                 overheadLabel="Group Name"
                 input={{
                   value: name,
-                  onChange: e => this.setState({ name: e.target.value }),
+                  onChange: e => this.setState({ name: e.target.value })
                 }}
               />
               <Button onClick={handleclick}>Save</Button>

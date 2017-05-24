@@ -1,11 +1,7 @@
 import React from 'react';
 import { bool, func, string, object } from 'prop-types';
 import { Card, Form, Button } from 'semantic-ui-react';
-import {
-  ReduxFormInput,
-  SmallModal,
-  ReduxFormDropdown,
-} from '../../balanc3-components';
+import { ReduxFormInput, SmallModal, ReduxFormDropdown } from '../../balanc3-components';
 
 class NewAddressModal extends React.Component {
   constructor(props) {
@@ -14,32 +10,33 @@ class NewAddressModal extends React.Component {
       address: props.address || '',
       name: props.name || '',
       wallet: props.wallet || '',
-      tokenStandard: 'eth',
+      tokenStandard: 'eth'
     };
   }
 
   componentWillReceiveProps(props) {
-    this.setState({ ...props });
+    this.setState({ walletId: props.wallet && props.wallet._id });
   }
 
   render() {
     const { active, hide, addAddress, data } = this.props;
-    const { address, name, wallet = {} } = this.state;
+    const { address, name } = this.state;
     const { userWallets = [] } = data;
     const walletsForSemantic = userWallets.map(wallet => {
       return {
         key: wallet._id,
         text: wallet.name,
-        value: wallet._id,
+        value: wallet._id
       };
     });
 
     const handleclick = e => {
       e.preventDefault();
+      debugger;
       addAddress({
         name: this.state.name,
-        wallet: this.state._id,
-        address: this.state.address,
+        wallet: this.state.walletId,
+        address: this.state.address
       });
     };
     return (
@@ -56,22 +53,22 @@ class NewAddressModal extends React.Component {
                 overheadLabel="New Address"
                 input={{
                   value: address,
-                  onChange: e => this.setState({ address: e.target.value }),
+                  onChange: e => this.setState({ address: e.target.value })
                 }}
               />
               <ReduxFormInput
                 overheadLabel="Address Name"
                 input={{
                   value: name,
-                  onChange: e => this.setState({ name: e.target.value }),
+                  onChange: e => this.setState({ name: e.target.value })
                 }}
               />
               <ReduxFormDropdown
                 overheadLabel="Choose Groop"
                 options={walletsForSemantic}
                 input={{
-                  value: wallet && wallet._id,
-                  onChange: newValue => this.setState({ wallet: newValue }),
+                  value: this.state.walletId,
+                  onChange: newValue => this.setState({ walletId: newValue })
                 }}
               />
               <Button onClick={handleclick}>Save</Button>
@@ -90,7 +87,7 @@ NewAddressModal.propTypes = {
   address: string,
   wallet: object,
   name: string,
-  data: object,
+  data: object
 };
 
 export default NewAddressModal;
