@@ -1,9 +1,8 @@
 import { connect } from 'react-redux'
 import { compose, lifecycle } from 'recompose'
-import { logout, getUserToken, userReceived, getUser } from '../reducers'
+import { logout, getUserToken, userReceived, getUser, showLoginModal } from '../reducers'
 import AccountForm from './update-account-form'
 import { gql, graphql } from 'react-apollo'
-import { showLoginModal } from '../modal/reducers'
 import { reduxForm } from 'redux-form'
 import { dispatch } from '../../../../utils'
 import { updateAccountFormState, getUpdateAccountFormState } from './reducers'
@@ -15,7 +14,14 @@ function mapDispatchToProps(dispatch) {
       e.preventDefault()
       dispatch(showLoginModal())
     },
-    dispatchLogout: () => dispatch(logout())
+    dispatchReset: e => {
+      e.preventDefault()
+      dispatch(showLoginModal('reset'))
+    },
+    dispatchLogout: e => {
+      e.preventDefault()
+      dispatch(logout())
+    }
   }
 }
 
@@ -31,7 +37,7 @@ const userMutation = gql`mutation ($data: updateUserAuthsInputType!) { updateUse
 
 const AccountFormWithMutation = graphql(userMutation, {
   props: ({ mutate }) => ({
-    submitHandler: user => {
+    updateUser: user => {
       // console.log('mutation called', user)
       try {
         delete user.token

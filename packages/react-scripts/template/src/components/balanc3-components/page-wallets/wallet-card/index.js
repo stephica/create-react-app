@@ -1,10 +1,8 @@
 import React from 'react'
 import { getTotalBalance } from '../logic'
 import { string, array, object } from 'prop-types'
-import { Divider, Card } from 'semantic-ui-react'
+import { Divider, Card, Button } from 'semantic-ui-react'
 import { Fill } from '../../../balanc3-components'
-// import { getTotalBalance } from '../logic'
-// import { graphCall, mutateAddress } from '../../../../queries'
 import { dispatch } from '../../../../utils'
 import { showNewAddressModal } from '../../new-address-modal/reducers'
 import styled from 'styled-components'
@@ -30,7 +28,7 @@ const WalletCard = ({ wallet, addresses }) => {
         </Fill>
         <Divider />
         {addresses.map(addressInfo => <AddressLine {...addressInfo} key={addressInfo._id} />)}
-        <p onClick={addNewWalletToGroup} style={{ cursor: 'pointer', marginTop: '20px' }}> + Add Address</p>
+        <Button basic color="green" fluid onClick={addNewWalletToGroup} style={{ cursor: 'pointer', marginTop: '20px' }}> + Add Address</Button>
       </Card.Content>
     </Card>
   )

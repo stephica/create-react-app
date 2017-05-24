@@ -38,7 +38,6 @@ export default combineReducers({
 })
 export const getSignupFormError = signupError
 export const showLoginModal = _showLoginModal
-// export const getUserWallets = state => state.account.user.wallets
 export const getLoginFormError = state => state.account.loginForm.error
 export const isUser = state => !!state.account.user
 export const isLoggedIn = state => !!Object.keys(state.account.user).length
