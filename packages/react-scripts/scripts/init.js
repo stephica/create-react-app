@@ -18,8 +18,8 @@ process.on('unhandledRejection', err => {
 
 const fs = require('fs-extra');
 const path = require('path');
-const spawn = require('cross-spawn');
 const chalk = require('chalk');
+const spawn = require('react-dev-utils/crossSpawn');
 
 module.exports = function(
   appPath,
@@ -150,11 +150,7 @@ module.exports = function(
   const displayedCommand = useYarn ? 'yarn' : 'npm';
 
   console.log();
-  console.log(`Success! You've created ${appName} at ${appPath}`);
-  console.log(
-    `Also, we've hooked up Redux to just work out of the gate.  Pretty neat right?`
-  );
-  console.log();
+  console.log(`Success! Created ${appName} at ${appPath}`);
   console.log('Inside that directory, you can run several commands:');
   console.log();
   console.log(chalk.cyan(`  ${displayedCommand} start`));
