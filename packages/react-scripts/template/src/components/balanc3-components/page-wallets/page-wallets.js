@@ -1,10 +1,10 @@
-import React from 'react';
-import { Buffer } from '../../balanc3-components';
-import { Button, Header } from 'semantic-ui-react';
-import { getGroups } from './logic';
-import WalletCard from './wallet-card';
-import OverallCard from './overall-card';
-import styled from 'styled-components';
+import React from 'react'
+import { Buffer } from '../../balanc3-components'
+import { Button, Header } from 'semantic-ui-react'
+import { getGroups } from './logic'
+import WalletCard from './wallet-card'
+import OverallCard from './overall-card'
+import styled from 'styled-components'
 
 const Column = styled('div')`
   &&&{
@@ -17,22 +17,22 @@ const Column = styled('div')`
       }
     }
   }
- `;
+ `
 const FlexManager = styled('div')`
   @media (min-width: ${({ theme }) => theme.medium}) {
     display: flex;
   }
-`;
+`
 
 const HeaderRow = styled('div')`
   display: flex;
   justify-content: space-between;
-`;
+`
 
 const WalletPage = ({ showNewAddressModal, showNewWalletModal, data }) => {
-  const { userAddresses: addresses, userWallets: wallets } = data;
-  const groups = getGroups(addresses, wallets);
-  const hasGroups = groups && !!groups.length;
+  const { userAddresses: addresses, userWallets: wallets } = data
+  const groups = getGroups(addresses, wallets)
+  const hasGroups = groups && !!groups.length
   return (
     <Buffer>
       <HeaderRow>
@@ -58,9 +58,9 @@ const WalletPage = ({ showNewAddressModal, showNewWalletModal, data }) => {
       {/* groups:
       <p style={{ whiteSpace: 'pre' }}>{JSON.stringify(groups, null, '\t')}</p> */}
     </Buffer>
-  );
-};
+  )
+}
 
-WalletPage.propTypes = {};
+WalletPage.propTypes = {}
 
-export default WalletPage;
+export default WalletPage
