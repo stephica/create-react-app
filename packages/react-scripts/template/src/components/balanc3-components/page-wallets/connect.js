@@ -20,11 +20,10 @@ function mapDispatchToProps(dispatch) {
 }
 
 const WalletPageWithData = graphql(gql`${queryAddressesAndWallets}`, {
-  options: props => {
-    return {
-      variables: {
-        token: getUserToken()
-      }
+  options: {
+    fetchPolicy: 'network-only',
+    variables: {
+      token: getUserToken()
     }
   }
 })(WalletPage)

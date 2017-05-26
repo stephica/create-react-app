@@ -1,18 +1,11 @@
-import React, { Component } from 'react';
-import ReduxExample from './components/page-redux-example';
-import GraphQl from './components/page-graphql';
-import { Route, Switch } from 'react-router-dom';
-import Home from './components/page-home';
-import Header from './components/balanc3-components/header';
-import _AccountPage from './components/page-account';
-import {
-  LoginModal,
-  Sidebar,
-  TermsPage,
-  NewAddressModal,
-  EditWalletModal,
-  NewWalletModal,
-} from './components/balanc3-components';
+import React, { Component } from 'react'
+import ReduxExample from './components/page-redux-example'
+import GraphQl from './components/page-graphql'
+import { Route, Switch } from 'react-router-dom'
+import Home from './components/page-home'
+import Header from './components/balanc3-components/header'
+import _AccountPage from './components/page-account'
+import { LoginModal, Sidebar, TermsPage, NewAddressModal, EditWalletModal, NewWalletModal } from './components/balanc3-components'
 
 class App extends Component {
   render() {
@@ -33,8 +26,8 @@ class App extends Component {
           <Route component={Home} />
         </Switch>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

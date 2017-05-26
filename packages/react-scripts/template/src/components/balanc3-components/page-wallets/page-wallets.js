@@ -4,6 +4,7 @@ import { Button, Header } from 'semantic-ui-react'
 import { getGroups } from './logic'
 import WalletCard from './wallet-card'
 import OverallCard from './overall-card'
+import { func, object } from 'prop-types'
 import styled from 'styled-components'
 
 const Column = styled('div')`
@@ -42,7 +43,7 @@ const WalletPage = ({ showNewAddressModal, showNewWalletModal, data }) => {
             Add Address
           </Button>
           <Button onClick={showNewWalletModal} style={{ marginBottom: '20px' }}>
-            Create Group{' '}
+            Create Group
           </Button>
         </span>
       </HeaderRow>
@@ -61,6 +62,10 @@ const WalletPage = ({ showNewAddressModal, showNewWalletModal, data }) => {
   )
 }
 
-WalletPage.propTypes = {}
+WalletPage.propTypes = {
+  showNewAddressModal: func,
+  showNewWalletModal: func,
+  data: object
+}
 
 export default WalletPage
